@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ContosoUniversity.Core.Entities;
 
 namespace ContosoUniversity.Web.Models.SchoolViewModels
 {

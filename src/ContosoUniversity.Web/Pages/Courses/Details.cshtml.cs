@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ContosoUniversity.Core.Entities;
+using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ContosoUniversity.Web.Data;
-using ContosoUniversity.Web.Models;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Web.Pages.Courses
 {
     public class DetailsModel : PageModel
     {
-        private readonly ContosoUniversity.Web.Data.SchoolContext _context;
+        private readonly ICourseRepository _repository;
 
-        public DetailsModel(ContosoUniversity.Web.Data.SchoolContext context)
+        public DetailsModel(ICourseRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public Course Course { get; set; }
@@ -28,10 +24,7 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _context.Courses
-                .AsNoTracking()
-                .Include(c => c.Department)
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _repository.GetCourseAsync(id);
 
             if (Course == null)
             {

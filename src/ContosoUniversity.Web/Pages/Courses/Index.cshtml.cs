@@ -1,35 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using ContosoUniversity.Core.Entities;
+using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ContosoUniversity.Web.Data;
-using ContosoUniversity.Web.Models;
-using ContosoUniversity.Web.Models.SchoolViewModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Web.Pages.Courses
 {
     public class IndexModel : PageModel
     {
-        private readonly ContosoUniversity.Web.Data.SchoolContext _context;
-
-        public IndexModel(ContosoUniversity.Web.Data.SchoolContext context)
+        private readonly ICourseRepository _courseRepository;
+        
+        public IndexModel(ICourseRepository courseRepository)
         {
-            _context = context;
+            _courseRepository = courseRepository;
         }
 
         public IList<Course> Course { get;set; }
 
-        //public IList<CourseViewModel> CourseVM { get; set; }
-
         public async Task OnGetAsync()
         {
-            Course = await _context.Courses
-                .Include(c => c.Department)
-                .AsNoTracking()
-                .ToListAsync();
+            Course = await _courseRepository.GetCoursesAsync();
         }
     }
 }

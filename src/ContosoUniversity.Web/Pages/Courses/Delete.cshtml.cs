@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ContosoUniversity.Core.Entities;
+using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ContosoUniversity.Web.Data;
-using ContosoUniversity.Web.Models;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Web.Pages.Courses
 {
     public class DeleteModel : PageModel
     {
-        private readonly ContosoUniversity.Web.Data.SchoolContext _context;
+        private readonly ICourseRepository _courseRepository;
 
-        public DeleteModel(ContosoUniversity.Web.Data.SchoolContext context)
+        public DeleteModel(ICourseRepository courseRepository)
         {
-            _context = context;
+            _courseRepository = courseRepository;
         }
 
         [BindProperty]
@@ -29,10 +25,7 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _context.Courses
-                .AsNoTracking()
-                .Include(c => c.Department)
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _courseRepository.GetCourseAsync(id);
 
             if (Course == null)
             {
@@ -48,14 +41,11 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _context.Courses
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _courseRepository.GetCourseAsync(id);
 
             if (Course != null)
             {
-                _context.Courses.Remove(Course);
-                await _context.SaveChangesAsync();
+                await _courseRepository.DeleteAsync(Course);
             }
 
             return RedirectToPage("./Index");
