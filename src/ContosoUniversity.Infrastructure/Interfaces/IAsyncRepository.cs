@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using ContosoUniversity.Application.Interfaces;
+using ContosoUniversity.Core.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

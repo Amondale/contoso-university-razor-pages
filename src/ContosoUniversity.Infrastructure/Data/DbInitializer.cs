@@ -7,34 +7,34 @@ namespace ContosoUniversity.Infrastructure.Data
         //{
 
         //    // Look for any students.
-        //    if (context.Student.Any())
+        //    if (context.Students.Any())
         //    {
         //        return;   // DB has been seeded
         //    }
 
-        //    var students = new Student[]
+        //    var students = new Students[]
         //    {
-        //        new Student { FirstMidName = "Carson",   LastName = "Alexander",
+        //        new Students { FirstMidName = "Carson",   LastName = "Alexander",
         //            EnrollmentDate = DateTime.Parse("2010-09-01") },
-        //        new Student { FirstMidName = "Meredith", LastName = "Alonso",
+        //        new Students { FirstMidName = "Meredith", LastName = "Alonso",
         //            EnrollmentDate = DateTime.Parse("2012-09-01") },
-        //        new Student { FirstMidName = "Arturo",   LastName = "Anand",
+        //        new Students { FirstMidName = "Arturo",   LastName = "Anand",
         //            EnrollmentDate = DateTime.Parse("2013-09-01") },
-        //        new Student { FirstMidName = "Gytis",    LastName = "Barzdukas",
+        //        new Students { FirstMidName = "Gytis",    LastName = "Barzdukas",
         //            EnrollmentDate = DateTime.Parse("2012-09-01") },
-        //        new Student { FirstMidName = "Yan",      LastName = "Li",
+        //        new Students { FirstMidName = "Yan",      LastName = "Li",
         //            EnrollmentDate = DateTime.Parse("2012-09-01") },
-        //        new Student { FirstMidName = "Peggy",    LastName = "Justice",
+        //        new Students { FirstMidName = "Peggy",    LastName = "Justice",
         //            EnrollmentDate = DateTime.Parse("2011-09-01") },
-        //        new Student { FirstMidName = "Laura",    LastName = "Norman",
+        //        new Students { FirstMidName = "Laura",    LastName = "Norman",
         //            EnrollmentDate = DateTime.Parse("2013-09-01") },
-        //        new Student { FirstMidName = "Nino",     LastName = "Olivetto",
+        //        new Students { FirstMidName = "Nino",     LastName = "Olivetto",
         //            EnrollmentDate = DateTime.Parse("2005-09-01") }
         //    };
 
-        //    foreach (Student s in students)
+        //    foreach (Students s in students)
         //    {
-        //        context.Student.Add(s);
+        //        context.Students.Add(s);
         //    }
         //    context.SaveChanges();
 
@@ -172,73 +172,73 @@ namespace ContosoUniversity.Infrastructure.Data
         //    }
         //    context.SaveChanges();
 
-        //    var enrollments = new Enrollment[]
+        //    var enrollments = new Enrollments[]
         //    {
-        //        new Enrollment {
+        //        new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Alexander").ID,
         //            CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
         //            Grade = Grade.A
         //        },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Alexander").ID,
         //            CourseID = courses.Single(c => c.Title == "Microeconomics" ).CourseID,
         //            Grade = Grade.C
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Alexander").ID,
         //            CourseID = courses.Single(c => c.Title == "Macroeconomics" ).CourseID,
         //            Grade = Grade.B
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //                StudentID = students.Single(s => s.LastName == "Alonso").ID,
         //            CourseID = courses.Single(c => c.Title == "Calculus" ).CourseID,
         //            Grade = Grade.B
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //                StudentID = students.Single(s => s.LastName == "Alonso").ID,
         //            CourseID = courses.Single(c => c.Title == "Trigonometry" ).CourseID,
         //            Grade = Grade.B
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Alonso").ID,
         //            CourseID = courses.Single(c => c.Title == "Composition" ).CourseID,
         //            Grade = Grade.B
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Anand").ID,
         //            CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Anand").ID,
         //            CourseID = courses.Single(c => c.Title == "Microeconomics").CourseID,
         //            Grade = Grade.B
         //            },
-        //        new Enrollment {
+        //        new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Barzdukas").ID,
         //            CourseID = courses.Single(c => c.Title == "Chemistry").CourseID,
         //            Grade = Grade.B
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Li").ID,
         //            CourseID = courses.Single(c => c.Title == "Composition").CourseID,
         //            Grade = Grade.B
         //            },
-        //            new Enrollment {
+        //            new Enrollments {
         //            StudentID = students.Single(s => s.LastName == "Justice").ID,
         //            CourseID = courses.Single(c => c.Title == "Literature").CourseID,
         //            Grade = Grade.B
         //            }
         //    };
 
-        //    foreach (Enrollment e in enrollments)
+        //    foreach (Enrollments e in enrollments)
         //    {
-        //        var enrollmentInDataBase = context.Enrollment.Where(
+        //        var enrollmentInDataBase = context.Enrollments.Where(
         //            s =>
-        //                    s.Student.ID == e.StudentID &&
+        //                    s.Students.ID == e.StudentID &&
         //                    s.Course.CourseID == e.CourseID).SingleOrDefault();
         //        if (enrollmentInDataBase == null)
         //        {
-        //            context.Enrollment.Add(e);
+        //            context.Enrollments.Add(e);
         //        }
         //    }
         //    context.SaveChanges();

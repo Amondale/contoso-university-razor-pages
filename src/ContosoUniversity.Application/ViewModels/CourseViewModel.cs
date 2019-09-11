@@ -1,4 +1,4 @@
-﻿namespace ContosoUniversity.Web.Models.SchoolViewModels
+﻿namespace ContosoUniversity.Application.ViewModels
 {
     public class CourseViewModel
     {

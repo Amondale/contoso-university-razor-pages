@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using ContosoUniversity.Core.Entities;
+﻿using ContosoUniversity.Core.Entities;
+using System.Collections.Generic;
 
-namespace ContosoUniversity.Web.Models.SchoolViewModels
+namespace ContosoUniversity.Application.ViewModels
 {
-    public class InstructorIndexData
+    public class InstructorsIndexViewModel
     {
         public IEnumerable<Instructor> Instructors { get; set; }
         public IEnumerable<Course> Courses { get; set; }

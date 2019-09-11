@@ -11,6 +11,8 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
             builder.ToTable("Instructor", "dbo");
 
             builder.HasKey(a => a.ID);
+
+            builder.Ignore(a => a.SelectedCourses);
         }
     }
 }

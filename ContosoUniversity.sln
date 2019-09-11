@@ -13,11 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{7C
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ContosoUniversity.Database", "src\ContosoUniversity.Database\ContosoUniversity.Database.sqlproj", "{0086E0CB-0737-4A3F-994A-6CF7532AC111}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Core", "src\ContosoUniversity.Core\ContosoUniversity.Core.csproj", "{5B20F819-8872-4405-AF52-98729E56491B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Core", "src\ContosoUniversity.Core\ContosoUniversity.Core.csproj", "{5B20F819-8872-4405-AF52-98729E56491B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Common", "src\ContosoUniversity.Common\ContosoUniversity.Common.csproj", "{85954011-08FE-495F-997B-519D0166A1D4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Infrastructure", "src\ContosoUniversity.Infrastructure\ContosoUniversity.Infrastructure.csproj", "{E71BB7EE-E568-4D40-9C43-D756CF495991}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Application", "src\ContosoUniversity.Application\ContosoUniversity.Application.csproj", "{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{E71BB7EE-E568-4D40-9C43-D756CF495991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E71BB7EE-E568-4D40-9C43-D756CF495991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E71BB7EE-E568-4D40-9C43-D756CF495991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{5B20F819-8872-4405-AF52-98729E56491B} = {15832008-A06D-4E47-85A9-F4F585EF6CAE}
 		{85954011-08FE-495F-997B-519D0166A1D4} = {15832008-A06D-4E47-85A9-F4F585EF6CAE}
 		{E71BB7EE-E568-4D40-9C43-D756CF495991} = {15832008-A06D-4E47-85A9-F4F585EF6CAE}
+		{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78} = {15832008-A06D-4E47-85A9-F4F585EF6CAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {464590CD-D92A-4E88-A825-DD7E59FF651B}
