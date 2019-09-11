@@ -7,12 +7,11 @@ namespace ContosoUniversity.Web.Pages.Courses
 {
     public class EditModel : DepartmentNamePageModel
     {
-        
-        private readonly ICourseRepository _courseRepository;
+        private readonly ICourseRepository _repository;
 
-        public EditModel(IDepartmentRepository departmentRepository, ICourseRepository courseRepository) : base(departmentRepository)
+        public EditModel(IDepartmentRepository departmentRepository, ICourseRepository repository) : base(departmentRepository)
         {
-            _courseRepository = courseRepository;
+            _repository = repository;
         }
 
         [BindProperty]
@@ -25,38 +24,41 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _courseRepository.GetCourseAsync(id);
-
+            Course = await _repository.GetCourseAsync(id);
 
             if (Course == null)
             {
                 return NotFound();
             }
 
-            PopulateDepartmentsDropDownList( Course.DepartmentID);
+            // Select current DepartmentID.
+            PopulateDepartmentsDropDownList();
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var courseToUpdate = await _courseRepository.GetByIdAsync(id);
+            var courseToUpdate = await _repository.GetCourseAsync(id);
 
             if (await TryUpdateModelAsync<Course>(
                 courseToUpdate,
                 "course",
                 c => c.Credits, c => c.DepartmentID, c => c.Title))
             {
-                await _courseRepository.UpdateAsync(courseToUpdate);
+                await _repository.UpdateAsync(courseToUpdate);
                 return RedirectToPage("./Index");
             }
 
-            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
+            // Select DepartmentID if TryUpdateModelAsync fails.
+            PopulateDepartmentsDropDownList();
             return Page();
         }
+
+
     }
 }

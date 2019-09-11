@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ContosoUniversity.Web.Models.SchoolViewModels
+namespace ContosoUniversity.Application.ViewModels
 {
-    public class EnrollmentDateGroup
+    public class EnrollmentTotalsViewModel
     {
         [DataType(DataType.Date)]
         public DateTime? EnrollmentDate { get; set; }

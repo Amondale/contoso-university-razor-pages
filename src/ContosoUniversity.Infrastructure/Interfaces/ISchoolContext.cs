@@ -5,8 +5,8 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 {
     public interface ISchoolContext
     {
-        DbSet<Student> Student { get; set; }
-        DbSet<Enrollment> Enrollment { get; set; }
+        DbSet<Student> Students { get; set; }
+        DbSet<Enrollment> Enrollments { get; set; }
         DbSet<Course> Courses { get; set; }
         DbSet<Department> Departments { get; set; }
         DbSet<Instructor> Instructors { get; set; }

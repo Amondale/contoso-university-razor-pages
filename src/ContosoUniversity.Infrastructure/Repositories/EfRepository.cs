@@ -1,7 +1,10 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using ContosoUniversity.Application.Infrastructure;
+using ContosoUniversity.Application.Interfaces;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +16,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
     /// https://blogs.msdn.microsoft.com/pfxteam/2012/04/13/should-i-expose-synchronous-wrappers-for-asynchronous-methods/
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity
+    public class EfRepository<T> : IAsyncRepository<T>, IRepository<T> where T : BaseEntity
     {
         protected readonly SchoolContext _dbContext;
 
@@ -60,6 +63,11 @@ namespace ContosoUniversity.Infrastructure.Repositories
         {
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public EntityEntry<T> GetDbEntityEntry(T entity)
+        {
+            return _dbContext.Entry(entity);
         }
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)

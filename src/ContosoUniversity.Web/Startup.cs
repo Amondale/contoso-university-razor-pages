@@ -1,6 +1,11 @@
-﻿using ContosoUniversity.Infrastructure.DbContexts;
+﻿using AutoMapper;
+using System.Reflection;
+using ContosoUniversity.Application.Infrastructure.AutoMapper;
+using ContosoUniversity.Application.Validators;
+using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
 using ContosoUniversity.Infrastructure.Repositories;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +27,9 @@ namespace ContosoUniversity.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add AutoMapper
+            services.AddAutoMapper(typeof(AutoMapperProfile).GetTypeInfo().Assembly);
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -30,7 +38,12 @@ namespace ContosoUniversity.Web
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(o =>
+                {
+                    o.RegisterValidatorsFromAssemblyContaining<CourseValidator>();
+                }); ;
 
             services.AddScoped<ISchoolContext>(provider => provider.GetService<SchoolContext>());
 
@@ -40,6 +53,9 @@ namespace ContosoUniversity.Web
             // Repositories
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+            services.AddScoped<IInstructorRepository, InstructorRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

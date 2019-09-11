@@ -20,6 +20,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
             return await _dbContext.Departments
                 .OrderBy(a => a.Name)
                 .AsNoTracking()
+                .Include(a=>a.Administrator)
                 .ToListAsync();
         }
 
@@ -32,9 +33,20 @@ namespace ContosoUniversity.Infrastructure.Repositories
                 .ToList();
         }
 
-        public async Task<Department> GetDepartmentAsync(int? courseId)
+        public async Task<Department> GetDepartmentAsync(int? departmentId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Departments
+                .AsNoTracking()
+                .Include(a => a.Administrator)
+                .FirstOrDefaultAsync(m => m.DepartmentID == departmentId);
+        }
+
+        public async Task<List<Department>> GetDepartmentsFromInstructor(int? instructorId)
+        {
+            return await  _dbContext.Departments
+                .Where(d => d.InstructorID == instructorId)
+                .Include(a => a.Administrator)
+                .ToListAsync();
         }
     }
 }

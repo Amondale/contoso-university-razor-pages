@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using ContosoUniversity.Application.Interfaces;
 using ContosoUniversity.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContosoUniversity.Infrastructure
+namespace ContosoUniversity.Application.Infrastructure
 {
     public class SpecificationEvaluator<T> where T : BaseEntity
     {
@@ -17,26 +20,26 @@ namespace ContosoUniversity.Infrastructure
             }
 
             // Includes all expression-based includes
-            query = specification.Includes.Aggregate(query,
-                (current, include) => current.Include(include));
+            query = Enumerable.Aggregate<Expression<Func<T, object>>, IQueryable<T>>(specification.Includes, query,
+                (current, include) => EntityFrameworkQueryableExtensions.Include<T, object>(current, include));
 
             // Include any string-based include statements
-            query = specification.IncludeStrings.Aggregate(query,
-                (current, include) => current.Include(include));
+            query = Enumerable.Aggregate<string, IQueryable<T>>(specification.IncludeStrings, query,
+                (current, include) => EntityFrameworkQueryableExtensions.Include<T>(current, include));
 
             // Apply ordering if expressions are set
             if (specification.OrderBy != null)
             {
-                query = query.OrderBy(specification.OrderBy);
+                query = Queryable.OrderBy<T, object>(query, specification.OrderBy);
             }
             else if (specification.OrderByDescending != null)
             {
-                query = query.OrderByDescending(specification.OrderByDescending);
+                query = Queryable.OrderByDescending<T, object>(query, specification.OrderByDescending);
             }
 
             if (specification.GroupBy != null)
             {
-                query = query.GroupBy(specification.GroupBy).SelectMany(x => x);
+                query = Queryable.GroupBy<T, object>(query, specification.GroupBy).SelectMany(x => x);
             }
 
             // Apply paging if enabled

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace ContosoUniversity.Infrastructure
+namespace ContosoUniversity.Application.Interfaces
 {
     public interface ISpecification<T>
     {

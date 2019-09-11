@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ContosoUniversity.Infrastructure.Interfaces
 {
-    public interface IDepartmentRepository : IAsyncRepository<Department>
+    public interface IDepartmentRepository : IAsyncRepository<Department>, IRepository<Department>
     {
         Task<List<Department>> GetDepartmentsAsync();
 
@@ -12,5 +12,6 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         Task<Department> GetDepartmentAsync(int? departmentId);
 
+        Task<List<Department>> GetDepartmentsFromInstructor(int? instructorId);
     }
 }
