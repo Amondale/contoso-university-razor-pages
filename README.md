@@ -31,4 +31,4 @@ You will need the following tools:
 
 ## License
 
-This project is licensed under the [MIT License](license.md).
+This project is licensed under the [MIT License](LICENSE.md).
