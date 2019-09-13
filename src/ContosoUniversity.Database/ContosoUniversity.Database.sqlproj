@@ -45,7 +45,7 @@
   </PropertyGroup>
   <!-- SQL CHANGE AUTOMATION OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -183,5 +183,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.0-Baseline\00001_20190906_1000_BASELINE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0-Changes\00002_20190913_1112_Refactor_DropForeignKeys.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0-Changes\00003_20190913_1114_Refactor_DropTables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0-Changes\00004_20190913_1114_Refactor_ReCreateTables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0-Changes\00005_20190913_1115_InsertData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0-Changes\00006_20190913_1116_ReAddForeignKeys.sql" />
   </ItemGroup>
 </Project>
