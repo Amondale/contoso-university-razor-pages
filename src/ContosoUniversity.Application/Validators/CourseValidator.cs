@@ -3,6 +3,9 @@ using FluentValidation;
 
 namespace ContosoUniversity.Application.Validators
 {
+    /// <summary>
+    /// Fluent Validation validator for the Course entity. 
+    /// </summary>
     public class CourseValidator : AbstractValidator<Course>
     {
         public CourseValidator()

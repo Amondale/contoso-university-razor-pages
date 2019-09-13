@@ -11,6 +11,8 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
             builder.ToTable("Department", "dbo");
 
             builder.HasKey(a => a.DepartmentID);
+
+            builder.Property(a => a.Budget).HasColumnType("money");
         }
     }
 }

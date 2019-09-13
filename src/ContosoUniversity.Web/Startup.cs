@@ -43,6 +43,8 @@ namespace ContosoUniversity.Web
                 .AddFluentValidation(o =>
                 {
                     o.RegisterValidatorsFromAssemblyContaining<CourseValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<DepartmentValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<InstructorValidator>();
                 }); ;
 
             services.AddScoped<ISchoolContext>(provider => provider.GetService<SchoolContext>());
