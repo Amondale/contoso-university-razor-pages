@@ -13,6 +13,12 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
             builder.HasKey(a => a.ID);
 
             builder.Ignore(a => a.SelectedCourses);
+
+            builder.Property(a => a.LastName).IsRequired();
+
+            builder.Property(a => a.FirstMidName).IsRequired();
+
+            builder.Property(a => a.FirstMidName).HasColumnName("FirstName");
         }
     }
 }
