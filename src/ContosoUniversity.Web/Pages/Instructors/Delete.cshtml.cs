@@ -35,13 +35,14 @@ namespace ContosoUniversity.Web.Pages.Instructors
         {
             var instructor = await _instructorRepository.GetInstructorWithChildrenAsync(id);
 
-            var departments = await _departmentRepository.GetDepartmentsFromInstructor(id);
+            //TODO
+            //var departments = await _departmentRepository.GetDepartmentsFromInstructor(id);
 
-            foreach (var d in departments)
-            {
-                d.InstructorID = null;
-                await _departmentRepository.UpdateAsync(d);
-            }
+            //foreach (var d in departments)
+            //{
+            //    d.DepartmentChairId = null;
+            //    await _departmentRepository.UpdateAsync(d);
+            //}
 
             await _instructorRepository.DeleteAsync(instructor);
             return RedirectToPage("./Index");

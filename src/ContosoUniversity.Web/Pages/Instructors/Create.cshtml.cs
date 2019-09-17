@@ -43,7 +43,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
             if (await TryUpdateModelAsync<Instructor>(
                 newInstructor,
                 "Instructor",
-                i => i.FirstMidName, 
+                i => i.FirstName, 
                                     i => i.LastName,
                                     i => i.HireDate, 
                                     i => i.OfficeAssignment))

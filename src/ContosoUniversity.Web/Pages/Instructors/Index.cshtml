@@ -25,7 +25,7 @@
         @foreach (var item in Model.InstructorsIndex.Instructors)
         {
             string selectedRow = "";
-            if (item.ID == Model.InstructorId)
+            if (item.InstructorId == Model.InstructorId)
             {
                 selectedRow = "success";
             }
@@ -34,7 +34,7 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstMidName)
+                    @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HireDate)
@@ -49,15 +49,15 @@
                     @{
                         foreach (var course in item.CourseAssignments)
                         {
-                            @course.Course.CourseID @:  @course.Course.Title <br />
+                            @course.Course.CourseId @:  @course.Course.Title <br />
                         }
                     }
                 </td>
                 <td>
-                    <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-page="./Index" asp-route-id="@item.InstructorId">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.InstructorId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.InstructorId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.InstructorId">Delete</a>
                 </td>
             </tr>
         }
@@ -79,22 +79,22 @@
         @foreach (var item in Model.InstructorsIndex.Courses)
         {
             string selectedRow = "";
-            if (item.CourseID == Model.CourseId)
+            if (item.CourseId == Model.CourseId)
             {
                 selectedRow = "success";
             }
             <tr class="@selectedRow">
                 <td>
-                    <a asp-page="./Index" asp-route-courseID="@item.CourseID">Select</a>
+                    <a asp-page="./Index" asp-route-courseID="@item.CourseId">Select</a>
                 </td>
                 <td>
-                    @item.CourseID
+                    @item.CourseId
                 </td>
                 <td>
                     @item.Title
                 </td>
                 <td>
-                    @item.Department.Name
+                    @item.Department.DepartmentName
                 </td>
             </tr>
         }

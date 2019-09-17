@@ -35,15 +35,15 @@ namespace ContosoUniversity.Web.Pages.Courses
             if (await TryUpdateModelAsync<Course>(
                 emptyCourse,
                 "course",
-                s => s.CourseID, s => s.DepartmentID, s => s.Title, s => s.Credits))
+                s => s.CourseId, s => s.DepartmentId, s => s.Title, s => s.Credits))
             {
 
                 await _courseRepository.AddAsync(emptyCourse);
                 return RedirectToPage("./Index");
             }
 
-            // Select DepartmentID if TryUpdateModelAsync fails.
-            PopulateDepartmentsDropDownList(emptyCourse.DepartmentID);
+            // Select DepartmentId if TryUpdateModelAsync fails.
+            PopulateDepartmentsDropDownList(emptyCourse.DepartmentId);
             return Page();
         }
     }

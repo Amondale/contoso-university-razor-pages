@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -34,7 +35,7 @@ namespace ContosoUniversity.Web.Pages.Departments
                 return NotFound();
             }
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName");
+            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName");
 
             return Page();
         }
@@ -68,7 +69,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             if (await TryUpdateModelAsync<Department>(
                 departmentToUpdate,
                 "Department",
-                s => s.Name, s => s.StartDate, s => s.Budget, s => s.InstructorID))
+                s => s.DepartmentName, s => s.FoundedDate, s => s.Budget, s => s.DepartmentChairId))
             {
                 try
                 {
@@ -99,7 +100,7 @@ namespace ContosoUniversity.Web.Pages.Departments
                 }
             }
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", departmentToUpdate.InstructorID);
+            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", departmentToUpdate.DepartmentChairId);
             return Page();
         }
 
@@ -108,7 +109,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             // ModelState contains the posted data because of the deletion error and will overide the Department instance values when displaying Page().
             ModelState.AddModelError(string.Empty,"Unable to save. The department was deleted by another user.");
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", Department.InstructorID);
+            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", Department.DepartmentChairId);
 
             return Page();
         }
@@ -116,24 +117,24 @@ namespace ContosoUniversity.Web.Pages.Departments
         private async Task SetDbErrorMessage(Department dbValues, Department clientValues)
         {
 
-            if (dbValues.Name != clientValues.Name)
+            if (dbValues.DepartmentName != clientValues.DepartmentName)
             {
                 ModelState.AddModelError("Department.Name",
-                    $"Current value: {dbValues.Name}");
+                    $"Current value: {dbValues.DepartmentName}");
             }
             if (dbValues.Budget != clientValues.Budget)
             {
                 ModelState.AddModelError("Department.Budget",
                     $"Current value: {dbValues.Budget:c}");
             }
-            if (dbValues.StartDate != clientValues.StartDate)
+            if (dbValues.FoundedDate != clientValues.FoundedDate)
             {
                 ModelState.AddModelError("Department.StartDate",
-                    $"Current value: {dbValues.StartDate:d}");
+                    $"Current value: {dbValues.FoundedDate:d}");
             }
-            if (dbValues.InstructorID != clientValues.InstructorID)
+            if (dbValues.DepartmentChairId != clientValues.DepartmentChairId)
             {
-                Instructor dbInstructor = await _instructorRepository.GetInstructorWithChildrenAsync(dbValues.InstructorID ?? 0);
+                Instructor dbInstructor = await _instructorRepository.GetInstructorWithChildrenAsync(dbValues.DepartmentChairId ?? new Guid());
                 ModelState.AddModelError("Department.InstructorID",
                     $"Current value: {dbInstructor?.FullName}");
             }

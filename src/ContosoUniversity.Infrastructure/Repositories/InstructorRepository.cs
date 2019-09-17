@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Application.ViewModels;
+﻿using System;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
@@ -49,24 +50,32 @@ namespace ContosoUniversity.Infrastructure.Repositories
             return await _dbContext.Instructors
                 .Include(i => i.OfficeAssignment)
                 .Include(i => i.CourseAssignments)
-                .SingleOrDefaultAsync(m => m.ID == instructorId);
+                .SingleOrDefaultAsync(m => m.InstructorId == instructorId);
         }
 
         public async Task<Instructor> GetInstructorAsync(int? instructorId)
         {
             return await _dbContext.Instructors
-                .SingleOrDefaultAsync(m => m.ID == instructorId);
+                .SingleOrDefaultAsync(m => m.InstructorId == instructorId);
+        }
+
+        public async Task<Instructor> GetInstructorWithChildrenAsync(Guid? id)
+        {
+            return await _dbContext.Instructors
+                .Include(i => i.OfficeAssignment)
+                .Include(i => i.CourseAssignments)
+                .SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public List<AssignedCourseViewModel> GetAssignedCourseData(Instructor instructor)
         {
             var allCourses = _dbContext.Courses;
-            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.CourseId));
+            var instructorCourses = new HashSet<Guid>(instructor.CourseAssignments.Select(c => c.CourseId));
             return allCourses.Select(course => new AssignedCourseViewModel
             {
-                CourseId = course.CourseID,
+                CourseId = course.CourseId,
                 CourseTitle = course.Title,
-                HasInstructorAssigned = instructorCourses.Contains(course.CourseID)
+                HasInstructorAssigned = instructorCourses.Contains(course.Id)
             }).ToList();
         }
     }

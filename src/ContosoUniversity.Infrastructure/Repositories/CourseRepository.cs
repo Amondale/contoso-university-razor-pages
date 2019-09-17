@@ -28,7 +28,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == courseId);
+                .FirstOrDefaultAsync(m => m.CourseId == courseId);
         }
 
     }

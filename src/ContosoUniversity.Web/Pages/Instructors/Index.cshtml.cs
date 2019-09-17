@@ -29,14 +29,14 @@ namespace ContosoUniversity.Web.Pages.Instructors
             if (id != null)
             {
                 InstructorId = id.Value;
-                var instructor = InstructorsIndex.Instructors.Single(i => i.ID == id.Value);
+                var instructor = InstructorsIndex.Instructors.Single(i => i.InstructorId == id.Value);
                 InstructorsIndex.Courses = instructor.CourseAssignments.Select(s => s.Course);
             }
 
             if (courseID != null)
             {
                 CourseId = courseID.Value;
-                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.CourseID == courseID).Enrollments;
+                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.CourseId == courseID).Enrollments;
             }
         }
     }

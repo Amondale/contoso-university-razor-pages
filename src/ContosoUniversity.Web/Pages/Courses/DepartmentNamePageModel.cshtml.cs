@@ -18,7 +18,7 @@ namespace ContosoUniversity.Web.Pages.Courses
         public void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
             DepartmentNameSL = new SelectList(_repository.GetDepartments(),
-                "DepartmentID", "Name", selectedDepartment);
+                "DepartmentId", "Name", selectedDepartment);
         }
     }
 }

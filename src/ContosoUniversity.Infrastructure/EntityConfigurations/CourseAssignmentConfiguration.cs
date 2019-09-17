@@ -10,11 +10,25 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
         {
             builder.ToTable("CourseAssignment", "dbo");
 
-            builder.Property(a => a.CourseId).HasColumnName("CourseID");
-            builder.Property(a => a.InstructorId).HasColumnName("InstructorID");
+            builder.Ignore(b => b.Id);
+
+            builder.Property(a => a.CourseId).HasColumnName("CourseGuid");
+
+            builder.Property(a => a.InstructorId).HasColumnName("InstructorGuid");
 
             builder.HasKey(a => new {CourseID = a.CourseId, InstructorID = a.InstructorId });
 
+            builder.Property(a => a.AuditCreateDateTime).IsRequired();
+
+            builder.Property(a => a.AuditUpdateDateTime).IsRequired();
+
+            builder.HasOne(a => a.Course)
+                .WithMany(b => b.CourseAssignments)
+                .HasForeignKey(a => a.CourseId);
+
+            builder.HasOne(a => a.Instructor)
+                .WithMany(b => b.CourseAssignments)
+                .HasForeignKey(a => a.InstructorId);
         }
     }
 }

@@ -12,21 +12,28 @@ namespace ContosoUniversity.Core.Entities
             CourseAssignments = new List<CourseAssignment>();
         }
 
-        public int ID { get; set; }
+        public int InstructorId { get; set; }
 
-        [Display(Name = "Last Name")]
+        public string Prefix { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+
         public string LastName { get; set; }
 
-        [Display(Name = "First Name")]
-        public string FirstMidName { get; set; }
+        public string Suffix { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Hire Date")]
+        public DateTime DateOfBirth { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
 
         [Display(Name = "Full Name")]
-        public string FullName => LastName + ", " + FirstMidName;
+        public string FullName => $"{LastName} , {FirstName} {MiddleName}";
 
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
         public OfficeAssignment OfficeAssignment { get; set; }
@@ -42,23 +49,23 @@ namespace ContosoUniversity.Core.Entities
             }
 
             var selectedCoursesHs = new HashSet<string>(selectedCourses);
-            var instructorCourses = new HashSet<int>
+            var instructorCourses = new HashSet<Guid>
                 (CourseAssignments.Select(c => c.CourseId));
 
             foreach (var course in courses)
             {
-                if (selectedCoursesHs.Contains(course.CourseID.ToString()))
+                if (selectedCoursesHs.Contains(course.CourseId.ToString()))
                 {
-                    if (!instructorCourses.Contains(course.CourseID))
+                    if (!instructorCourses.Contains(course.Id))
                     {
                         CourseAssignments.Add(new CourseAssignment { Course = course, Instructor = this });
                     }
                 }
                 else
                 {
-                    if (instructorCourses.Contains(course.CourseID))
+                    if (instructorCourses.Contains(course.Id))
                     {
-                        var toRemove = CourseAssignments.Single(ci => ci.CourseId == course.CourseID);
+                        var toRemove = CourseAssignments.Single(ci => ci.CourseId == course.Id);
                         CourseAssignments.Remove(toRemove);
                     }
                 }

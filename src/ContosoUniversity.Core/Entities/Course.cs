@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ContosoUniversity.Core.Entities
 {
     public class Course : BaseEntity
     {
-        public int CourseID { get; set; }
+        public int CourseId { get; set; }
 
         public string Title { get; set; }
 
         public int Credits { get; set; }
 
-        public int DepartmentID { get; set; }
+        public Guid DepartmentId { get; set; }
 
         public Department Department { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }

@@ -51,7 +51,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
             if (await TryUpdateModelAsync<Instructor>(
                 instructorToUpdate,
                 "Instructor",
-                i => i.FirstMidName, i => i.LastName,
+                i => i.FirstName, i => i.LastName,
                 i => i.HireDate, i => i.OfficeAssignment))
             {
                 if (String.IsNullOrWhiteSpace(

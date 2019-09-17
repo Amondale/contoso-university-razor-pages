@@ -15,16 +15,28 @@ namespace ContosoUniversity.Application.Validators
                 .WithMessage("Last name cannot be empty.")
                 .NotEmpty()
                 .WithMessage("Last name cannot be empty.")
-                .Length(3, 50)
-                .WithMessage("Last name must be between 3 - 50 characters in length.");
+                .Length(3, 100)
+                .WithMessage("Last name must be between 3 - 100 characters in length.");
 
-            RuleFor(a => a.FirstMidName)
+            RuleFor(a => a.FirstName)
                 .NotNull()
                 .WithMessage("First name cannot be empty.")
                 .NotEmpty()
                 .WithMessage("First name cannot be empty.")
-                .Length(3, 50)
-                .WithMessage("First name must be between 3 - 50 characters in length.");
+                .Length(3, 100)
+                .WithMessage("First name must be between 3 - 100 characters in length.");
+
+            RuleFor(a => a.FirstName)
+                .NotNull()
+                .WithMessage("First name cannot be empty.")
+                .NotEmpty()
+                .WithMessage("First name cannot be empty.")
+                .Length(3, 100)
+                .WithMessage("First name must be between 3 - 100 characters in length.");
+
+            RuleFor(a => a.MiddleName)
+                .MaximumLength(100)
+                .WithMessage("Middle name cannot exceed 100 characters in length.");
         }
     }
 }

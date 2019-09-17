@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Application.Infrastructure;
+﻿using System;
+using ContosoUniversity.Application.Infrastructure;
 using ContosoUniversity.Application.Interfaces;
 using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
@@ -26,6 +27,11 @@ namespace ContosoUniversity.Infrastructure.Repositories
         }
 
         public virtual async Task<T> GetByIdAsync(int id)
+        {
+            return await _dbContext.Set<T>().FindAsync(id);
+        }
+
+        public virtual async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }

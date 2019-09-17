@@ -31,7 +31,7 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            // Select current DepartmentID.
+            // Select current DepartmentId.
             PopulateDepartmentsDropDownList();
             return Page();
         }
@@ -48,13 +48,13 @@ namespace ContosoUniversity.Web.Pages.Courses
             if (await TryUpdateModelAsync<Course>(
                 courseToUpdate,
                 "course",
-                c => c.Credits, c => c.DepartmentID, c => c.Title))
+                c => c.Credits, c => c.DepartmentId, c => c.Title))
             {
                 await _repository.UpdateAsync(courseToUpdate);
                 return RedirectToPage("./Index");
             }
 
-            // Select DepartmentID if TryUpdateModelAsync fails.
+            // Select DepartmentId if TryUpdateModelAsync fails.
             PopulateDepartmentsDropDownList();
             return Page();
         }
