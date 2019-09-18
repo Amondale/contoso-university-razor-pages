@@ -17,22 +17,22 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Enrollment>> GetEnrollmentsAsync()
         {
-            return await _dbContext.Enrollments
+            return await DbContext.Enrollments
                 .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Enrollment> GetEnrollmentAsync(int? enrollmentId)
         {
-            return await _dbContext.Enrollments
+            return await DbContext.Enrollments
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.EnrollmentID == enrollmentId);
+                .FirstOrDefaultAsync(m => m.EnrollmentId == enrollmentId);
         }
 
         public async Task<List<EnrollmentTotalsViewModel>> GetEnrollmentTotalsAsync()
         {
             var data =
-                from student in _dbContext.Students
+                from student in DbContext.Students
                 group student by student.EnrollmentDate
                 into dateGroup
                 select new EnrollmentTotalsViewModel()

@@ -46,7 +46,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
                 i => i.FirstName, 
                                     i => i.LastName,
                                     i => i.HireDate, 
-                                    i => i.OfficeAssignment))
+                                    i => i.OfficeLocation))
             {
                 var createdInstructor = await _instructorRepository.AddAsync(newInstructor);
                 if (Instructor.SelectedCourses != null)

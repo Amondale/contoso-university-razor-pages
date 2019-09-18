@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContosoUniversity.Core.Entities
 {
@@ -9,9 +10,11 @@ namespace ContosoUniversity.Core.Entities
 
     public class Enrollment : BaseEntity
     {
-        public int EnrollmentID { get; set; }
-        public int CourseID { get; set; }
-        public int StudentID { get; set; }
+        public int EnrollmentId { get; set; }
+
+        public Guid CourseId { get; set; }
+
+        public Guid StudentId { get; set; }
 
         [DisplayFormat(NullDisplayText = "No Grade")]
         public Grade? Grade { get; set; }

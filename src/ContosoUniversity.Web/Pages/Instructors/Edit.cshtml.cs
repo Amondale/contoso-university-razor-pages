@@ -52,13 +52,8 @@ namespace ContosoUniversity.Web.Pages.Instructors
                 instructorToUpdate,
                 "Instructor",
                 i => i.FirstName, i => i.LastName,
-                i => i.HireDate, i => i.OfficeAssignment))
+                i => i.HireDate, i => i.OfficeLocation))
             {
-                if (String.IsNullOrWhiteSpace(
-                    instructorToUpdate.OfficeAssignment?.Location))
-                {
-                    instructorToUpdate.OfficeAssignment = null;
-                }
 
                 await _instructorRepository.UpdateAsync(instructorToUpdate);
                 instructorToUpdate.HandleCourses(Instructor.SelectedCourses, courses);

@@ -15,7 +15,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Course>> GetCoursesAsync()
         {
-            return await _dbContext.Courses
+            return await DbContext.Courses
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .AsNoTracking()
@@ -24,7 +24,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<Course> GetCourseAsync(int? courseId)
         {
-            return await _dbContext.Courses
+            return await DbContext.Courses
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .AsNoTracking()

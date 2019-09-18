@@ -13,11 +13,11 @@ namespace ContosoUniversity.Web.Pages.Courses
             _repository = repository;
         }
 
-        public SelectList DepartmentNameSL { get; set; }
+        public SelectList DepartmentNameSl { get; set; }
 
         public void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            DepartmentNameSL = new SelectList(_repository.GetDepartments(),
+            DepartmentNameSl = new SelectList(_repository.GetDepartments(),
                 "DepartmentId", "Name", selectedDepartment);
         }
     }

@@ -32,7 +32,7 @@ namespace ContosoUniversity.Web.Pages.Students
 
             var emptyStudent = new Student();
 
-            if (await TryUpdateModelAsync<Student>(emptyStudent, "student", s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
+            if (await TryUpdateModelAsync<Student>(emptyStudent, "student", s => s.FirstName, s => s.LastName, s => s.EnrollmentDate))
             {
                 await _repository.AddAsync(emptyStudent);
                 return RedirectToPage("./Index");

@@ -18,10 +18,10 @@ namespace ContosoUniversity.Web.Pages.Departments
             _instructorRepository = instructorRepository;
         }
 
-        public SelectList InstructorNameSL { get; set; }
+        public SelectList InstructorNameSl { get; set; }
         public IActionResult OnGet()
         {
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FirstMidName");
+            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "ID", "FirstMidName");
             return Page();
         }
 

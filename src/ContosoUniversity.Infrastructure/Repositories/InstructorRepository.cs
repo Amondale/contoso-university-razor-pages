@@ -18,15 +18,14 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Instructor>> GetInstructorsAsync()
         {
-            return await _dbContext.Instructors
+            return await DbContext.Instructors
                 .OrderBy(a=>a.FullName)
                 .ToListAsync();
         }
 
         public async Task<List<Instructor>> GetInstructorsWithChildrenAsync()
         {
-            return await _dbContext.Instructors
-            .Include(i => i.OfficeAssignment)
+            return await DbContext.Instructors
                 .Include(i => i.CourseAssignments)
                 .ThenInclude(i => i.Course)
                 .ThenInclude(i => i.Department)
@@ -40,36 +39,34 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public List<Instructor> GetInstructors()
         {
-            return _dbContext.Instructors
+            return DbContext.Instructors
                 .OrderBy(a => a.FullName)
                 .ToList();
         }
 
         public async Task<Instructor> GetInstructorWithChildrenAsync(int? instructorId)
         {
-            return await _dbContext.Instructors
-                .Include(i => i.OfficeAssignment)
+            return await DbContext.Instructors
                 .Include(i => i.CourseAssignments)
                 .SingleOrDefaultAsync(m => m.InstructorId == instructorId);
         }
 
         public async Task<Instructor> GetInstructorAsync(int? instructorId)
         {
-            return await _dbContext.Instructors
+            return await DbContext.Instructors
                 .SingleOrDefaultAsync(m => m.InstructorId == instructorId);
         }
 
         public async Task<Instructor> GetInstructorWithChildrenAsync(Guid? id)
         {
-            return await _dbContext.Instructors
-                .Include(i => i.OfficeAssignment)
+            return await DbContext.Instructors
                 .Include(i => i.CourseAssignments)
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public List<AssignedCourseViewModel> GetAssignedCourseData(Instructor instructor)
         {
-            var allCourses = _dbContext.Courses;
+            var allCourses = DbContext.Courses;
             var instructorCourses = new HashSet<Guid>(instructor.CourseAssignments.Select(c => c.CourseId));
             return allCourses.Select(course => new AssignedCourseViewModel
             {

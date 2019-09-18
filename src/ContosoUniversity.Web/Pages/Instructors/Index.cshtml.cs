@@ -19,7 +19,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
         public int InstructorId { get; private set; }
         public int CourseId { get; private set; }
 
-        public async Task OnGetAsync(int? id, int? courseID)
+        public async Task OnGetAsync(int? id, int? courseId)
         {
             InstructorsIndex = new InstructorsIndexViewModel
             {
@@ -33,10 +33,10 @@ namespace ContosoUniversity.Web.Pages.Instructors
                 InstructorsIndex.Courses = instructor.CourseAssignments.Select(s => s.Course);
             }
 
-            if (courseID != null)
+            if (courseId != null)
             {
-                CourseId = courseID.Value;
-                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.CourseId == courseID).Enrollments;
+                CourseId = courseId.Value;
+                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.CourseId == courseId).Enrollments;
             }
         }
     }

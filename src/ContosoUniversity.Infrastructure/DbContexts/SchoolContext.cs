@@ -17,7 +17,6 @@ namespace ContosoUniversity.Infrastructure.DbContexts
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
-        public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         public DbSet<CourseAssignment> CourseAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +26,6 @@ namespace ContosoUniversity.Infrastructure.DbContexts
             modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
             modelBuilder.ApplyConfiguration(new EnrollmentConfiguration());
             modelBuilder.ApplyConfiguration(new InstructorConfiguration());
-            modelBuilder.ApplyConfiguration(new OfficeAssignmentConfiguration());
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
         }
     }

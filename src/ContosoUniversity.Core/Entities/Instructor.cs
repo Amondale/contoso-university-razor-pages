@@ -24,6 +24,8 @@ namespace ContosoUniversity.Core.Entities
 
         public string Suffix { get; set; }
 
+        public string OfficeLocation { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
@@ -36,7 +38,6 @@ namespace ContosoUniversity.Core.Entities
         public string FullName => $"{LastName} , {FirstName} {MiddleName}";
 
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
-        public OfficeAssignment OfficeAssignment { get; set; }
 
         public string[] SelectedCourses { get; set; }
 

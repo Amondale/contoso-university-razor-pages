@@ -19,7 +19,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Student>> GetStudentsAsync()
         {
-            return await _dbContext.Students
+            return await DbContext.Students
                 .OrderBy(a => a.FullName)
                 .AsNoTracking()
                 .ToListAsync();
@@ -27,7 +27,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public List<Student> GetStudents()
         {
-            return _dbContext.Students
+            return DbContext.Students
                 .OrderBy(a => a.FullName)
                 .AsNoTracking()
                 .ToList();
@@ -35,11 +35,11 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<Student> GetStudentAsync(int? studentId)
         {
-            return await _dbContext.Students
+            return await DbContext.Students
                 .Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == studentId);
+                .FirstOrDefaultAsync(m => m.StudentId == studentId);
         }
 
         public async Task<IPagedList<Student>> GetStudentsByFilter(string searchString, string sortOrder, int? pageIndex)
@@ -48,12 +48,12 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                enumerableStudents = _dbContext.Students
-                                    .Where(s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString));
+                enumerableStudents = DbContext.Students
+                                    .Where(s => s.LastName.Contains(searchString) || s.FirstName.Contains(searchString));
             }
             else
             {
-                enumerableStudents = _dbContext.Students;
+                enumerableStudents = DbContext.Students;
             }
 
             switch (sortOrder)

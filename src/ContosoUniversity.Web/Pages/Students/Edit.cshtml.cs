@@ -46,7 +46,7 @@ namespace ContosoUniversity.Web.Pages.Students
             if (await TryUpdateModelAsync<Student>(
                 studentToUpdate,
                 "student",
-                s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
+                s => s.FirstName, s => s.LastName, s => s.EnrollmentDate))
             {
                 await _repository.UpdateAsync(studentToUpdate);
                 return RedirectToPage("./Index");

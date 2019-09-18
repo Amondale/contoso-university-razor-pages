@@ -7,16 +7,26 @@ namespace ContosoUniversity.Core.Entities
 {
     public class Student : BaseEntity
     {
-        public int ID { get; set; }
-        
-        [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters")]
-        [Display(Name = "Last Name")]
+        public Student()
+        {
+            Enrollments =  new List<Enrollment>();
+        }
+
+        public int StudentId { get; set; }
+
+        public string Prefix { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+
         public string LastName { get; set; }
 
-        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters")]
-        [Column("FirstName")]
-        [Display(Name = "First Name")]
-        public string FirstMidName { get; set; }
+        public string Suffix { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -24,7 +34,7 @@ namespace ContosoUniversity.Core.Entities
         public DateTime EnrollmentDate { get; set; }
 
         [Display(Name = "Full Name")]
-        public string FullName => LastName + ", " + FirstMidName;
+        public string FullName => $"{LastName} , {FirstName} {MiddleName}";
 
         public ICollection<Enrollment> Enrollments { get; set; }
     }

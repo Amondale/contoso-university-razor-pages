@@ -17,7 +17,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Department>> GetDepartmentsAsync()
         {
-            return await _dbContext.Departments
+            return await DbContext.Departments
                 .OrderBy(a => a.DepartmentName)
                 .AsNoTracking()
                 .Include(a=>a.Administrator)
@@ -27,7 +27,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public List<Department> GetDepartments()
         {
-            return _dbContext.Departments
+            return DbContext.Departments
                 .OrderBy(a => a.DepartmentName)
                 .AsNoTracking()
                 .ToList();
@@ -35,7 +35,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<Department> GetDepartmentAsync(int? departmentId)
         {
-            return await _dbContext.Departments
+            return await DbContext.Departments
                 .AsNoTracking()
                 .Include(a => a.Administrator)
                 .FirstOrDefaultAsync(m => m.DepartmentId == departmentId);
@@ -43,7 +43,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Department>> GetDepartmentsFromInstructor(Guid? instructorId)
         {
-            return await  _dbContext.Departments
+            return await  DbContext.Departments
                 .Where(d => d.DepartmentChairId == instructorId)
                 .Include(a => a.Administrator)
                 .ToListAsync();

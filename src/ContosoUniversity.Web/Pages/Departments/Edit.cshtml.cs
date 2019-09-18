@@ -24,7 +24,7 @@ namespace ContosoUniversity.Web.Pages.Departments
         [BindProperty]
         public Department Department { get; set; }
         
-        public SelectList InstructorNameSL { get; set; }
+        public SelectList InstructorNameSl { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -35,7 +35,7 @@ namespace ContosoUniversity.Web.Pages.Departments
                 return NotFound();
             }
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName");
+            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName");
 
             return Page();
         }
@@ -100,7 +100,7 @@ namespace ContosoUniversity.Web.Pages.Departments
                 }
             }
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", departmentToUpdate.DepartmentChairId);
+            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", departmentToUpdate.DepartmentChairId);
             return Page();
         }
 
@@ -109,7 +109,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             // ModelState contains the posted data because of the deletion error and will overide the Department instance values when displaying Page().
             ModelState.AddModelError(string.Empty,"Unable to save. The department was deleted by another user.");
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", Department.DepartmentChairId);
+            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", Department.DepartmentChairId);
 
             return Page();
         }

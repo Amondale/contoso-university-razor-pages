@@ -45,6 +45,7 @@ namespace ContosoUniversity.Web
                     o.RegisterValidatorsFromAssemblyContaining<CourseValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<DepartmentValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<StudentValidator>();
                 }); ;
 
             services.AddScoped<ISchoolContext>(provider => provider.GetService<SchoolContext>());

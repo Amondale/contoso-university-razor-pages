@@ -10,9 +10,23 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
         {
             builder.ToTable("Student", "dbo");
 
+            builder.HasKey(a => a.Id);
+
+            builder.Property(a => a.StudentId).UseSqlServerIdentityColumn();
+
+            builder.Property(a => a.Id).HasColumnName("StudentGuid");
+
+            builder.Ignore(a => a.FullName);
+
             builder.Property(a => a.LastName).IsRequired();
 
-            
+            builder.Property(a => a.FirstName).IsRequired();
+
+            builder.Property(a => a.AuditCreateDateTime).IsRequired();
+
+            builder.Property(a => a.AuditUpdateDateTime).IsRequired();
+
+
         }
     }
 }
