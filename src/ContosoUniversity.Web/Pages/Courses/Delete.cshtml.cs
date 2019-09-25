@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,7 +19,7 @@ namespace ContosoUniversity.Web.Pages.Courses
         [BindProperty]
         public Course Course { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
@@ -34,7 +35,7 @@ namespace ContosoUniversity.Web.Pages.Courses
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (id == null)
             {

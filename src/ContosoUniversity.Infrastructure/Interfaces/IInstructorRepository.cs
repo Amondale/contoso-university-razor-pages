@@ -14,9 +14,7 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         List<Instructor> GetInstructors();
 
-        Task<Instructor> GetInstructorAsync(int? instructorId);
-
-        Task<Instructor> GetInstructorWithChildrenAsync(int? instructorId);
+        Task<Instructor> GetInstructorAsync(Guid? id);
 
         Task<Instructor> GetInstructorWithChildrenAsync(Guid? id);
 

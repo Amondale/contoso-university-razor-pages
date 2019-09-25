@@ -19,9 +19,10 @@ namespace ContosoUniversity.Web.Pages.Departments
         }
 
         public SelectList InstructorNameSl { get; set; }
-        public IActionResult OnGet()
+
+        public async Task<IActionResult> OnGet()
         {
-            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "ID", "FirstMidName");
+            InstructorNameSl = new SelectList(await _instructorRepository.GetInstructorsAsync(), "Id", "FullName");
             return Page();
         }
 

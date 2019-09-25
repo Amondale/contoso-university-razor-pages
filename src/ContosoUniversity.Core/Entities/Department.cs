@@ -6,9 +6,9 @@ namespace ContosoUniversity.Core.Entities
 {
     public class Department : BaseEntity
     {
-        public int DepartmentId { get; set; }
-
         public string DepartmentName { get; set; }
+
+        public Guid? DepartmentChairId { get; set; }
 
         [DataType(DataType.Currency)]
         public decimal Budget { get; set; }
@@ -18,9 +18,8 @@ namespace ContosoUniversity.Core.Entities
         [Display(Name = "Start Date")]
         public DateTime FoundedDate { get; set; }
 
-        public Guid? DepartmentChairId { get; set; }
+        public Instructor DepartmentChair { get; set; }
 
-        public Instructor Administrator { get; set; }
         public ICollection<Course> Courses { get; set; }
     }
 }

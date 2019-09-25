@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ContosoUniversity.Core.Entities;
 
@@ -8,7 +9,7 @@ namespace ContosoUniversity.Infrastructure.Interfaces
     {
         Task<List<Course>> GetCoursesAsync();
 
-        Task<Course> GetCourseAsync(int? courseId);
+        Task<Course> GetCourseAsync(Guid? id);
 
     }
 }

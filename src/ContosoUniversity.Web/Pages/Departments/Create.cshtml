@@ -31,7 +31,9 @@
             <div class="form-group">
                 <label class="control-label">Instructor</label>
                 <select asp-for="Department.DepartmentChairId" class="form-control"
-                        asp-items="@Model.InstructorNameSl"></select>
+                        asp-items="@Model.InstructorNameSl">
+                    <option value="">-- Select Department Chair --</option>
+                </select>
                 <span asp-validation-for="Department.DepartmentChairId" class="text-danger">
                 </span>
             </div>

@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Application.ViewModels;
+﻿using System;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
@@ -16,10 +17,10 @@ namespace ContosoUniversity.Web.Pages.Instructors
             _repository = repository;
         }
         public InstructorsIndexViewModel InstructorsIndex { get; set; }
-        public int InstructorId { get; private set; }
-        public int CourseId { get; private set; }
+        public Guid InstructorId { get; private set; }
+        public Guid CourseId { get; private set; }
 
-        public async Task OnGetAsync(int? id, int? courseId)
+        public async Task OnGetAsync(Guid? id, Guid? courseId)
         {
             InstructorsIndex = new InstructorsIndexViewModel
             {
@@ -29,14 +30,14 @@ namespace ContosoUniversity.Web.Pages.Instructors
             if (id != null)
             {
                 InstructorId = id.Value;
-                var instructor = InstructorsIndex.Instructors.Single(i => i.InstructorId == id.Value);
+                var instructor = InstructorsIndex.Instructors.Single(i => i.Id == id.Value);
                 InstructorsIndex.Courses = instructor.CourseAssignments.Select(s => s.Course);
             }
 
             if (courseId != null)
             {
                 CourseId = courseId.Value;
-                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.CourseId == courseId).Enrollments;
+                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.Id == courseId).Enrollments;
             }
         }
     }

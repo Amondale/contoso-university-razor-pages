@@ -16,6 +16,8 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
 
             builder.Property(a => a.InstructorId).HasColumnName("InstructorGuid");
 
+            builder.Property(a => a.RowVersion).HasColumnName("RecordVersion");
+
             builder.HasKey(a => new {CourseID = a.CourseId, InstructorID = a.InstructorId });
 
             builder.Property(a => a.AuditCreateDateTime).IsRequired();

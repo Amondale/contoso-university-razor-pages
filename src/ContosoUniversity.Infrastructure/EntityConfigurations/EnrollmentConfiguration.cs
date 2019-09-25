@@ -12,12 +12,21 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
 
             builder.HasKey(a => a.Id);
 
-            builder.Property(a => a.EnrollmentId).UseSqlServerIdentityColumn();
-
             builder.Property(a => a.Id).HasColumnName("EnrollmentGuid");
 
+            builder.Property(a => a.CourseId).HasColumnName("CourseGuid");
 
+            builder.Property(a => a.StudentId).HasColumnName("StudentGuid");
 
+            builder.Property(a => a.RowVersion).HasColumnName("RecordVersion");
+
+            builder.HasOne(a => a.Course)
+                .WithMany(b => b.Enrollments)
+                .HasForeignKey(a => a.CourseId);
+
+            builder.HasOne(a => a.Student)
+                .WithMany(b => b.Enrollments)
+                .HasForeignKey(a => a.StudentId);
         }
     }
 }

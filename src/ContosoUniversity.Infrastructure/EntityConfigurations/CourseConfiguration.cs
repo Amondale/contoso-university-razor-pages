@@ -12,8 +12,6 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
 
             builder.HasKey(a => a.Id);
 
-            builder.Property(a => a.CourseId).UseSqlServerIdentityColumn();
-
             builder.Property(a => a.Id).HasColumnName("CourseGuid");
 
             builder.Property(a => a.DepartmentId).HasColumnName("DepartmentGuid");

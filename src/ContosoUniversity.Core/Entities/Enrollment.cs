@@ -10,8 +10,6 @@ namespace ContosoUniversity.Core.Entities
 
     public class Enrollment : BaseEntity
     {
-        public int EnrollmentId { get; set; }
-
         public Guid CourseId { get; set; }
 
         public Guid StudentId { get; set; }
@@ -20,6 +18,7 @@ namespace ContosoUniversity.Core.Entities
         public Grade? Grade { get; set; }
 
         public Course Course { get; set; }
+
         public Student Student { get; set; }
     }
 }

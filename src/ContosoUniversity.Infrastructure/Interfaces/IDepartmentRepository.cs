@@ -11,7 +11,7 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         List<Department> GetDepartments();
 
-        Task<Department> GetDepartmentAsync(int? departmentId);
+        Task<Department> GetDepartmentAsync(Guid? id);
 
         Task<List<Department>> GetDepartmentsFromInstructor(Guid? instructorId);
     }

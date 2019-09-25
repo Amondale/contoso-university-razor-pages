@@ -2,7 +2,11 @@
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 using X.PagedList;
 
 namespace ContosoUniversity.Web.Pages.Students
@@ -10,10 +14,12 @@ namespace ContosoUniversity.Web.Pages.Students
     public class IndexModel : PageModel
     {
         private readonly IStudentRepository _repository;
+        private readonly IMapper _mapper;
 
-        public IndexModel(IStudentRepository repository)
+        public IndexModel(IStudentRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public string NameSort { get; set; }
@@ -21,10 +27,11 @@ namespace ContosoUniversity.Web.Pages.Students
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IPagedList<Student> Student { get;set; }
+        public IPagedList<StudentViewModel> Students { get;set; }
 
         public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
         {
+            var page = pageIndex ?? 1;
             CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
@@ -40,8 +47,8 @@ namespace ContosoUniversity.Web.Pages.Students
 
             CurrentFilter = searchString;
 
-            Student = await _repository.GetStudentsByFilter(searchString, sortOrder, pageIndex);
-
+            var tempStudents = await _repository.GetStudentsByFilter(searchString, sortOrder);
+            Students = _mapper.Map<List<StudentViewModel>>(tempStudents).ToPagedList(page, 8);
         }
     }
 }

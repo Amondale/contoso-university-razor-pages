@@ -36,14 +36,14 @@
             @Html.DisplayFor(model => model.Department.RowVersion)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Department.Administrator)
+            @Html.DisplayNameFor(model => model.Department.DepartmentChair)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Department.Administrator.FirstName)
+            @Html.DisplayFor(model => model.Department.DepartmentChair.FirstName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Department.DepartmentId">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Department.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

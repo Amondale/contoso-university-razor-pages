@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
 namespace ContosoUniversity.Core.Entities
@@ -12,8 +10,6 @@ namespace ContosoUniversity.Core.Entities
             Enrollments =  new List<Enrollment>();
         }
 
-        public int StudentId { get; set; }
-
         public string Prefix { get; set; }
 
         public string FirstName { get; set; }
@@ -24,16 +20,10 @@ namespace ContosoUniversity.Core.Entities
 
         public string Suffix { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Enrollment Date")]
         public DateTime EnrollmentDate { get; set; }
 
-        [Display(Name = "Full Name")]
         public string FullName => $"{LastName} , {FirstName} {MiddleName}";
 
         public ICollection<Enrollment> Enrollments { get; set; }

@@ -39,22 +39,16 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public List<Instructor> GetInstructors()
         {
-            return DbContext.Instructors
+            return  DbContext.Instructors
                 .OrderBy(a => a.FullName)
                 .ToList();
         }
 
-        public async Task<Instructor> GetInstructorWithChildrenAsync(int? instructorId)
+        public async Task<Instructor> GetInstructorAsync(Guid? id)
         {
             return await DbContext.Instructors
                 .Include(i => i.CourseAssignments)
-                .SingleOrDefaultAsync(m => m.InstructorId == instructorId);
-        }
-
-        public async Task<Instructor> GetInstructorAsync(int? instructorId)
-        {
-            return await DbContext.Instructors
-                .SingleOrDefaultAsync(m => m.InstructorId == instructorId);
+                .SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<Instructor> GetInstructorWithChildrenAsync(Guid? id)
@@ -70,7 +64,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
             var instructorCourses = new HashSet<Guid>(instructor.CourseAssignments.Select(c => c.CourseId));
             return allCourses.Select(course => new AssignedCourseViewModel
             {
-                CourseId = course.CourseId,
+                CourseId = course.Id,
                 CourseTitle = course.Title,
                 HasInstructorAssigned = instructorCourses.Contains(course.Id)
             }).ToList();

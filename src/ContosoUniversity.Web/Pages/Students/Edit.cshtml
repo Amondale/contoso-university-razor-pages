@@ -1,4 +1,4 @@
-﻿@page "{id:int}"
+﻿@page "{id}"
 @model ContosoUniversity.Web.Pages.Students.EditModel
 
 @{
@@ -13,25 +13,58 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Student.ID" />
+
+            <input type="hidden" asp-for="Student.Id" />
+            <input type="hidden" asp-for="Student.RowVersion" />
+            <input type="hidden" asp-for="Student.AuditCreateDateTime" />
+            <input type="hidden" asp-for="Student.AuditUpdateDateTime" />
+
             <div class="form-group">
-                <label asp-for="Student.LastName" class="control-label"></label>
-                <input asp-for="Student.LastName" class="form-control" />
-                <span asp-validation-for="Student.LastName" class="text-danger"></span>
+                <label asp-for="Student.Prefix" class="control-label"></label>
+                <input asp-for="Student.Prefix" class="form-control" />
+                <span asp-validation-for="Student.Prefix" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Student.FirstName" class="control-label"></label>
                 <input asp-for="Student.FirstName" class="form-control" />
                 <span asp-validation-for="Student.FirstName" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="Student.MiddleName" class="control-label"></label>
+                <input asp-for="Student.MiddleName" class="form-control" />
+                <span asp-validation-for="Student.MiddleName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Student.LastName" class="control-label"></label>
+                <input asp-for="Student.LastName" class="form-control" />
+                <span asp-validation-for="Student.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Student.Suffix" class="control-label"></label>
+                <input asp-for="Student.Suffix" class="form-control" />
+                <span asp-validation-for="Student.Suffix" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Student.DateOfBirth" class="control-label"></label>
+                <input asp-for="Student.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Student.DateOfBirth" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Student.EnrollmentDate" class="control-label"></label>
                 <input asp-for="Student.EnrollmentDate" class="form-control" />
                 <span asp-validation-for="Student.EnrollmentDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>

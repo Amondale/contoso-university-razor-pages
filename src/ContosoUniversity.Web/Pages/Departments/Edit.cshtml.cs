@@ -26,7 +26,7 @@ namespace ContosoUniversity.Web.Pages.Departments
         
         public SelectList InstructorNameSl { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             Department = await _departmentRepository.GetDepartmentAsync(id);
 
@@ -35,12 +35,12 @@ namespace ContosoUniversity.Web.Pages.Departments
                 return NotFound();
             }
 
-            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName");
+            InstructorNameSl = new SelectList(await _instructorRepository.GetInstructorsAsync(), "Id", "FullName");
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             if (!ModelState.IsValid)
             {

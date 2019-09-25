@@ -1,42 +1,76 @@
-﻿@page "{id:int}"
+﻿@page "{id}"
 @model ContosoUniversity.Web.Pages.Students.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
-
 <p class="text-danger">@Model.ErrorMessage</p>
 
-<h3>Are you sure you want to delete this?</h3>
+<h4>Are you sure you want to delete this student?</h4>
+<hr />
 <div>
-    <h4>Students</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Student.LastName)
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.Prefix)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Student.LastName)
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.Prefix)
         </dd>
-        <dt>
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Student.FirstName)
         </dt>
-        <dd>
+
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Student.FirstName)
         </dd>
-        <dt>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.MiddleName)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.MiddleName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.LastName)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.LastName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.Suffix)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.Suffix)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.DateOfBirth)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.DateOfBirth)
+        </dd>
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Student.EnrollmentDate)
         </dt>
-        <dd>
+
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Student.EnrollmentDate)
         </dd>
     </dl>
 
     <form method="post">
-        <input type="hidden" asp-for="Student.StudentId" />
-        <input type="submit" value="Delete" class="btn btn-primary" /> |
+        <input type="hidden" asp-for="Student.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>
 </div>

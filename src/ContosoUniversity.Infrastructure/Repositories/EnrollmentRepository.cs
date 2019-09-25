@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Application.ViewModels;
+﻿using System;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
@@ -22,11 +23,11 @@ namespace ContosoUniversity.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Enrollment> GetEnrollmentAsync(int? enrollmentId)
+        public async Task<Enrollment> GetEnrollmentAsync(Guid? id)
         {
             return await DbContext.Enrollments
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.EnrollmentId == enrollmentId);
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<List<EnrollmentTotalsViewModel>> GetEnrollmentTotalsAsync()

@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,13 +23,13 @@ namespace ContosoUniversity.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Course> GetCourseAsync(int? courseId)
+        public async Task<Course> GetCourseAsync(Guid? id)
         {
             return await DbContext.Courses
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseId == courseId);
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
     }

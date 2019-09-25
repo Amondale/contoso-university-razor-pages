@@ -51,7 +51,11 @@ namespace ContosoUniversity.Web
             services.AddScoped<ISchoolContext>(provider => provider.GetService<SchoolContext>());
 
             services.AddDbContext<SchoolContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SchoolContext")));
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("SchoolContext"));
+                    options.EnableDetailedErrors(true);
+                    options.EnableSensitiveDataLogging(true);
+                });
 
             // Repositories
             services.AddScoped<ICourseRepository, CourseRepository>();

@@ -12,8 +12,6 @@ namespace ContosoUniversity.Core.Entities
             CourseAssignments = new List<CourseAssignment>();
         }
 
-        public int InstructorId { get; set; }
-
         public string Prefix { get; set; }
 
         public string FirstName { get; set; }
@@ -28,7 +26,7 @@ namespace ContosoUniversity.Core.Entities
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -55,7 +53,7 @@ namespace ContosoUniversity.Core.Entities
 
             foreach (var course in courses)
             {
-                if (selectedCoursesHs.Contains(course.CourseId.ToString()))
+                if (selectedCoursesHs.Contains(course.Id.ToString()))
                 {
                     if (!instructorCourses.Contains(course.Id))
                     {

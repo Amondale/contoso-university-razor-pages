@@ -9,6 +9,13 @@ namespace ContosoUniversity.Application.Infrastructure.AutoMapper
     {
         public AutoMapperProfile()
         {
+            //Students
+            CreateMap<Student, StudentViewModel>();
+
+
+            // ViewModel to Domain
+            CreateMap<StudentViewModel, Student>();
+
             LoadStandardMappings();
             LoadCustomMappings();
             LoadConverters();

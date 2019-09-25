@@ -12,8 +12,6 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
 
             builder.HasKey(a => a.Id);
 
-            builder.Property(a => a.InstructorId).UseSqlServerIdentityColumn();
-
             builder.Property(a => a.Id).HasColumnName("InstructorGuid");
 
             builder.Ignore(a => a.SelectedCourses);
@@ -27,6 +25,8 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
             builder.Property(a => a.AuditCreateDateTime).IsRequired();
 
             builder.Property(a => a.AuditUpdateDateTime).IsRequired();
+
+            builder.Property(a => a.RowVersion).HasColumnName("RecordVersion");
         }
     }
 }

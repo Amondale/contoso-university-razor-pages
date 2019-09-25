@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Department[0].RowVersion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Department[0].Administrator)
+                @Html.DisplayNameFor(model => model.Department[0].DepartmentChair)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Department[0].RowVersion)
@@ -49,15 +49,15 @@
                 @Html.DisplayFor(modelItem => item.RowVersion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Administrator.FirstName)
+                @Html.DisplayFor(modelItem => item.DepartmentChair.FirstName)
             </td>
             <td>
                 @item.RowVersion[7]
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.DepartmentId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.DepartmentId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.DepartmentId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
