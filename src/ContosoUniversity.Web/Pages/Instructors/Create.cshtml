@@ -13,28 +13,59 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Instructor.Id" />
+            <input type="hidden" asp-for="Instructor.RowVersion" />
+            <input type="hidden" asp-for="Instructor.AuditCreateDateTime" />
+            <input type="hidden" asp-for="Instructor.AuditUpdateDateTime" />
+
             <div class="form-group">
-                <label asp-for="Instructor.LastName" class="control-label"></label>
-                <input asp-for="Instructor.LastName" class="form-control" />
-                <span asp-validation-for="Instructor.LastName" class="text-danger"></span>
+                <label asp-for="Instructor.Prefix" class="col-form-label"></label>
+                <input asp-for="Instructor.Prefix" class="form-control" />
+                <span asp-validation-for="Instructor.Prefix" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Instructor.FirstName" class="control-label"></label>
+                <label asp-for="Instructor.FirstName" class="col-form-label"></label>
                 <input asp-for="Instructor.FirstName" class="form-control" />
                 <span asp-validation-for="Instructor.FirstName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Instructor.HireDate" class="control-label"></label>
+                <label asp-for="Instructor.MiddleName" class="col-form-label"></label>
+                <input asp-for="Instructor.MiddleName" class="form-control" />
+                <span asp-validation-for="Instructor.MiddleName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Instructor.LastName" class="col-form-label"></label>
+                <input asp-for="Instructor.LastName" class="form-control" />
+                <span asp-validation-for="Instructor.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Instructor.Suffix" class="col-form-label"></label>
+                <input asp-for="Instructor.Suffix" class="form-control" />
+                <span asp-validation-for="Instructor.Suffix" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Instructor.DateOfBirth" class="col-form-label"></label>
+                <input asp-for="Instructor.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Instructor.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instructor.HireDate" class="col-form-label"></label>
                 <input asp-for="Instructor.HireDate" class="form-control" />
                 <span asp-validation-for="Instructor.HireDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Instructor.OfficeLocation" class="control-label"></label>
+                <label asp-for="Instructor.OfficeLocation" class="col-form-label"></label>
                 <input asp-for="Instructor.OfficeLocation" class="form-control" />
                 <span asp-validation-for="Instructor.OfficeLocation" class="text-danger" />
             </div>
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="offset-2 col-md-10">
                     <table>
                         <tr>
                             @{

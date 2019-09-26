@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ContosoUniversity.Web
 {
@@ -39,13 +40,16 @@ namespace ContosoUniversity.Web
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddFluentValidation(o =>
                 {
                     o.RegisterValidatorsFromAssemblyContaining<CourseValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<CourseViewModelValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<DepartmentValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<InstructorViewModelValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<StudentValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<StudentViewModelValidator>();
                 }); ;
 
             services.AddScoped<ISchoolContext>(provider => provider.GetService<SchoolContext>());
@@ -63,10 +67,15 @@ namespace ContosoUniversity.Web
             services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
             services.AddScoped<IInstructorRepository, InstructorRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+
+            services.AddControllersWithViews();
+
+            services.AddRazorPages();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -76,10 +85,18 @@ namespace ContosoUniversity.Web
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseRouting();
+
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
-            app.UseMvc();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

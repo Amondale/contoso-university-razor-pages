@@ -1,8 +1,9 @@
-﻿using System;
-using ContosoUniversity.Core.Entities;
+﻿using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Threading.Tasks;
 
 namespace ContosoUniversity.Web.Pages.Courses
@@ -10,13 +11,16 @@ namespace ContosoUniversity.Web.Pages.Courses
     public class DetailsModel : PageModel
     {
         private readonly ICourseRepository _repository;
+        private readonly IMapper _mapper;
 
-        public DetailsModel(ICourseRepository repository)
+        public DetailsModel(ICourseRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public Course Course { get; set; }
+        [BindProperty]
+        public CourseViewModel Course { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -25,7 +29,7 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _repository.GetCourseAsync(id);
+            Course = _mapper.Map<CourseViewModel>(await _repository.GetCourseAsync(id));
 
             if (Course == null)
             {

@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Application.Tests", "tests\ContosoUniversity.Application.Tests\ContosoUniversity.Application.Tests.csproj", "{0BADE492-B769-4216-896B-BFEC919356D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Infrastructure.Tests", "tests\ContosoUniversity.Infrastructure.Tests\ContosoUniversity.Infrastructure.Tests.csproj", "{4D894A19-537D-4C40-B56F-324793116019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity.Infrastructure.Tests", "tests\ContosoUniversity.Infrastructure.Tests\ContosoUniversity.Infrastructure.Tests.csproj", "{4D894A19-537D-4C40-B56F-324793116019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Common.Tests", "tests\ContosoUniversity.Common.Tests\ContosoUniversity.Common.Tests.csproj", "{BF2FABA8-8444-4B83-A32A-ADEF910B5E03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{4D894A19-537D-4C40-B56F-324793116019}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D894A19-537D-4C40-B56F-324793116019}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D894A19-537D-4C40-B56F-324793116019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF2FABA8-8444-4B83-A32A-ADEF910B5E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2FABA8-8444-4B83-A32A-ADEF910B5E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2FABA8-8444-4B83-A32A-ADEF910B5E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2FABA8-8444-4B83-A32A-ADEF910B5E03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{47933656-8E34-4E4C-8C8C-B0C1A2DB5D78} = {15832008-A06D-4E47-85A9-F4F585EF6CAE}
 		{0BADE492-B769-4216-896B-BFEC919356D8} = {BDEC0625-8190-45A2-B871-620AF3C420C7}
 		{4D894A19-537D-4C40-B56F-324793116019} = {BDEC0625-8190-45A2-B871-620AF3C420C7}
+		{BF2FABA8-8444-4B83-A32A-ADEF910B5E03} = {BDEC0625-8190-45A2-B871-620AF3C420C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {464590CD-D92A-4E88-A825-DD7E59FF651B}

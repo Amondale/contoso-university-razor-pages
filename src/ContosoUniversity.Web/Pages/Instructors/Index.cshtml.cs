@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,10 +12,12 @@ namespace ContosoUniversity.Web.Pages.Instructors
     public class IndexModel : PageModel
     {
         private readonly IInstructorRepository _repository;
+        private readonly IMapper _mapper;
 
-        public IndexModel(IInstructorRepository repository)
+        public IndexModel(IInstructorRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         public InstructorsIndexViewModel InstructorsIndex { get; set; }
         public Guid InstructorId { get; private set; }
@@ -24,7 +27,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
         {
             InstructorsIndex = new InstructorsIndexViewModel
             {
-                Instructors = await _repository.GetInstructorsWithChildrenAsync()
+                Instructors = _mapper.Map<List<InstructorViewModel>>( await _repository.GetInstructorsWithChildrenAsync())
             };
 
             if (id != null)

@@ -12,7 +12,10 @@ namespace ContosoUniversity.Core.Entities
         public Guid DepartmentId { get; set; }
 
         public Department Department { get; set; }
+
         public ICollection<Enrollment> Enrollments { get; set; }
+
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
+
     }
 }

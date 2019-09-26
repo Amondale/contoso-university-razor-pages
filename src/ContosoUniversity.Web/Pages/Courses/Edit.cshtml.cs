@@ -3,20 +3,24 @@ using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 
 namespace ContosoUniversity.Web.Pages.Courses
 {
     public class EditModel : DepartmentNamePageModel
     {
         private readonly ICourseRepository _repository;
+        private readonly IMapper _mapper;
 
-        public EditModel(IDepartmentRepository departmentRepository, ICourseRepository repository) : base(departmentRepository)
+        public EditModel(IDepartmentRepository departmentRepository, ICourseRepository repository, IMapper mapper) : base(departmentRepository)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [BindProperty]
-        public Course Course { get; set; }
+        public CourseViewModel Course { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -25,15 +29,14 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _repository.GetCourseAsync(id);
+            Course = _mapper.Map<CourseViewModel>(await _repository.GetCourseAsync(id));
 
             if (Course == null)
             {
                 return NotFound();
             }
 
-            // Select current DepartmentId.
-            PopulateDepartmentsDropDownList();
+            PopulateDepartmentsDropDownList(Course.DepartmentId);
             return Page();
         }
 
@@ -41,6 +44,7 @@ namespace ContosoUniversity.Web.Pages.Courses
         {
             if (!ModelState.IsValid)
             {
+                PopulateDepartmentsDropDownList(Course.DepartmentId);
                 return Page();
             }
 
@@ -55,8 +59,7 @@ namespace ContosoUniversity.Web.Pages.Courses
                 return RedirectToPage("./Index");
             }
 
-            // Select DepartmentId if TryUpdateModelAsync fails.
-            PopulateDepartmentsDropDownList();
+            PopulateDepartmentsDropDownList(Course.DepartmentId);
             return Page();
         }
 

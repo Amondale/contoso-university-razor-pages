@@ -1,6 +1,9 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
 namespace ContosoUniversity.Web.Pages.Courses
@@ -8,26 +11,29 @@ namespace ContosoUniversity.Web.Pages.Courses
     public class CreateModel : DepartmentNamePageModel
     {
         private readonly ICourseRepository _courseRepository;
+        private readonly IMapper _mapper;
+        
+        [BindProperty]
+        public CourseViewModel Course { get; set; }
 
-        public CreateModel(IDepartmentRepository departmentRepository, ICourseRepository courseRepository): base(departmentRepository)
+        public CreateModel(IDepartmentRepository departmentRepository, ICourseRepository courseRepository, IMapper mapper) : base(departmentRepository)
         {
             _courseRepository = courseRepository;
+            _mapper = mapper;
         }
 
         public IActionResult OnGet()
         {
-            PopulateDepartmentsDropDownList();
+            Course = _mapper.Map<CourseViewModel>(new Course());
+            PopulateDepartmentsDropDownList(null);
             return Page();
         }
-
-        [BindProperty]
-        public Course Course { get; set; }
-
+        
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return OnGet();
             }
 
             var emptyCourse = new Course();
@@ -39,12 +45,11 @@ namespace ContosoUniversity.Web.Pages.Courses
             {
 
                 await _courseRepository.AddAsync(emptyCourse);
+
                 return RedirectToPage("./Index");
             }
-
-            // Select DepartmentId if TryUpdateModelAsync fails.
-            PopulateDepartmentsDropDownList(emptyCourse.DepartmentId);
-            return Page();
+            
+            return OnGet();
         }
     }
 }

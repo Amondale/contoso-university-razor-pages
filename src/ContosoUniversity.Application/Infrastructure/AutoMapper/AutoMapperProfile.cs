@@ -9,12 +9,18 @@ namespace ContosoUniversity.Application.Infrastructure.AutoMapper
     {
         public AutoMapperProfile()
         {
-            //Students
+            //Domain to ViewModel
             CreateMap<Student, StudentViewModel>();
 
+            CreateMap<Course, CourseViewModel>()
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.DepartmentName));
+
+            CreateMap<Instructor, InstructorViewModel>();
 
             // ViewModel to Domain
             CreateMap<StudentViewModel, Student>();
+            CreateMap<CourseViewModel, Course>();
+            CreateMap<InstructorViewModel, Instructor>();
 
             LoadStandardMappings();
             LoadCustomMappings();

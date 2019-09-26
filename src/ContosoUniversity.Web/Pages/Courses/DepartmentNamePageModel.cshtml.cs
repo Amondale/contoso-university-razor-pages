@@ -6,19 +6,19 @@ namespace ContosoUniversity.Web.Pages.Courses
 {
     public class DepartmentNamePageModel : PageModel
     {
-        private readonly IDepartmentRepository _repository;
+        protected readonly IDepartmentRepository DepartmentRepository;
 
         public DepartmentNamePageModel(IDepartmentRepository repository)
         {
-            _repository = repository;
+            DepartmentRepository = repository;
         }
 
-        public SelectList DepartmentNameSl { get; set; }
+        public SelectList DepartmentSelectList { get; set; }
 
-        public void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        public async void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            DepartmentNameSl = new SelectList(_repository.GetDepartments(),
-                "DepartmentId", "DepartmentName", selectedDepartment);
+            DepartmentSelectList = new SelectList(await DepartmentRepository.GetDepartmentsAsync(),
+                "Id", "DepartmentName", selectedDepartment);
         }
     }
 }

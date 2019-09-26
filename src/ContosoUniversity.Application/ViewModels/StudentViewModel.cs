@@ -20,6 +20,8 @@ namespace ContosoUniversity.Application.ViewModels
             IsActive = isActive;
             RowVersion = rowVersion;
         }
+
+        [Display(Name = "Student Id")]
         public Guid Id { get; set; }
 
         [Display(Name = "Prefix")]
