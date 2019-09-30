@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 
 namespace ContosoUniversity.Web.Pages.Departments
 {
@@ -14,28 +16,30 @@ namespace ContosoUniversity.Web.Pages.Departments
     {
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IInstructorRepository _instructorRepository;
+        private readonly IMapper _mapper;
 
-        public EditModel(IDepartmentRepository departmentRepository, IInstructorRepository instructorRepository)
+        public EditModel(IDepartmentRepository departmentRepository, IInstructorRepository instructorRepository, IMapper mapper)
         {
             _departmentRepository = departmentRepository;
             _instructorRepository = instructorRepository;
+            _mapper = mapper;
         }
 
         [BindProperty]
-        public Department Department { get; set; }
-        
-        public SelectList InstructorNameSl { get; set; }
+        public DepartmentViewModel Department { get; set; }
+
+        public SelectList DepartmentChairSelectList { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            Department = await _departmentRepository.GetDepartmentAsync(id);
+            Department = _mapper.Map<DepartmentViewModel>(await _departmentRepository.GetDepartmentAsync(id));
 
             if (Department == null)
             {
                 return NotFound();
             }
 
-            InstructorNameSl = new SelectList(await _instructorRepository.GetInstructorsAsync(), "Id", "FullName");
+            DepartmentChairSelectList = new SelectList(await _instructorRepository.GetInstructorsAsync(), "Id", "FullName");
 
             return Page();
         }
@@ -89,10 +93,10 @@ namespace ContosoUniversity.Web.Pages.Departments
                     }
 
                     var dbValues = (Department)databaseEntry.ToObject();
+
                     await SetDbErrorMessage(dbValues, clientValues);
 
-                    // Save the current RowVersion so next postback
-                    // matches unless an new concurrency issue happens.
+                    // Save the current RowVersion so next postback matches unless an new concurrency issue happens.
                     Department.RowVersion = (byte[])dbValues.RowVersion;
 
                     // Must clear the model error for the next postback.
@@ -100,7 +104,8 @@ namespace ContosoUniversity.Web.Pages.Departments
                 }
             }
 
-            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", departmentToUpdate.DepartmentChairId);
+            DepartmentChairSelectList = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName", departmentToUpdate.DepartmentChairId);
+
             return Page();
         }
 
@@ -109,7 +114,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             // ModelState contains the posted data because of the deletion error and will overide the Department instance values when displaying Page().
             ModelState.AddModelError(string.Empty,"Unable to save. The department was deleted by another user.");
 
-            InstructorNameSl = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", Department.DepartmentChairId);
+            DepartmentChairSelectList = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName", Department.DepartmentChairId);
 
             return Page();
         }

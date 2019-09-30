@@ -1,9 +1,9 @@
 ﻿using ContosoUniversity.Application.Validators;
+using ContosoUniversity.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using ContosoUniversity.Core.Entities;
 
 namespace ContosoUniversity.Application.ViewModels
 {
@@ -11,7 +11,6 @@ namespace ContosoUniversity.Application.ViewModels
     {
         public InstructorViewModel()
         {
-
         }
         public InstructorViewModel(DateTime auditCreateDateTime, DateTime auditUpdateDateTime, bool isActive, byte[] rowVersion)
         {
@@ -39,7 +38,7 @@ namespace ContosoUniversity.Application.ViewModels
         [Display(Name = "Suffix")]
         public string Suffix { get; set; }
 
-        [Display(Name = "OfficeLocation")]
+        [Display(Name = "Office Location")]
         public string OfficeLocation { get; set; }
 
         [DataType(DataType.Date)]
@@ -64,13 +63,11 @@ namespace ContosoUniversity.Application.ViewModels
         [Timestamp]
         public byte[] RowVersion { get; }
 
-        public string[] SelectedCourses { get; set; }
-
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var validator = new InstructorViewModelValidator();
+            var validator = new InstructorCreateViewModelValidator();
             var result = validator.Validate(this);
             return result.Errors.Select(item => new ValidationResult(item.ErrorMessage, new[] { item.PropertyName }));
         }

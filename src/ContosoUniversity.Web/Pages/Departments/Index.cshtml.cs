@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -9,17 +10,19 @@ namespace ContosoUniversity.Web.Pages.Departments
     public class IndexModel : PageModel
     {
         private readonly IDepartmentRepository _repository;
+        private readonly IMapper _mapper;
 
-        public IndexModel(IDepartmentRepository repository)
+        public IndexModel(IDepartmentRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public IList<Department> Department { get;set; }
+        public IList<DepartmentViewModel> Department { get;set; }
 
         public async Task OnGetAsync()
         {
-            Department = await _repository.GetDepartmentsAsync();
+            Department = _mapper.Map<List<DepartmentViewModel>>(await _repository.GetDepartmentsAsync());
         }
     }
 }

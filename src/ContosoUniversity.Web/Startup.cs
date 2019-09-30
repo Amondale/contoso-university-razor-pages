@@ -28,7 +28,6 @@ namespace ContosoUniversity.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add AutoMapper
             services.AddAutoMapper(typeof(AutoMapperProfile).GetTypeInfo().Assembly);
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -46,6 +45,7 @@ namespace ContosoUniversity.Web
                     o.RegisterValidatorsFromAssemblyContaining<CourseValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<CourseViewModelValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<DepartmentValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<DepartmentViewModelValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorViewModelValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorCreateViewModelValidator>();

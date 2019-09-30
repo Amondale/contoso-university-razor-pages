@@ -1,10 +1,9 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using ContosoUniversity.Application.ViewModels;
 
 namespace ContosoUniversity.Web.Pages.Courses
 {

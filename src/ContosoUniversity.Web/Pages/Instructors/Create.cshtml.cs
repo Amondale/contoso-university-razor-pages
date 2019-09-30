@@ -1,20 +1,17 @@
-﻿using ContosoUniversity.Application.ViewModels;
+﻿using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 
 namespace ContosoUniversity.Web.Pages.Instructors
 {
     public class Create : PageModel
     {
         [BindProperty]
-        public InstructorCreateViewModel Instructor { get; set; }
-
-        //public List<AssignedCourseViewModel> AssignedCourseViewModels;
+        public InstructorViewModel Instructor { get; set; }
 
         private readonly IInstructorRepository _instructorRepository;
         private readonly ICourseRepository _courseRepository;
@@ -30,7 +27,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
         public IActionResult OnGet()
         {
             var emptyInstructor = new Instructor();
-            Instructor = _mapper.Map<InstructorCreateViewModel>(emptyInstructor);
+            Instructor = _mapper.Map<InstructorViewModel>(emptyInstructor);
 
             return Page();
         }
@@ -41,7 +38,6 @@ namespace ContosoUniversity.Web.Pages.Instructors
             {
                 return Page();
             }
-            var courses = await _courseRepository.ListAllAsync();
             var newInstructor = new Instructor();
 
             if (await TryUpdateModelAsync<Instructor>(
@@ -56,12 +52,8 @@ namespace ContosoUniversity.Web.Pages.Instructors
                                     i => i.DateOfBirth,
                                     i => i.HireDate))
             {
-                var createdInstructor = await _instructorRepository.AddAsync(newInstructor);
-                //if (Instructor.SelectedCourses != null)
-                //{
-                //    createdInstructor.HandleCourses(Instructor.SelectedCourses, courses);
-                //    await _instructorRepository.UpdateAsync(createdInstructor);
-                //}
+                await _instructorRepository.AddAsync(newInstructor);
+
                 return RedirectToPage("./Index");
             }
 

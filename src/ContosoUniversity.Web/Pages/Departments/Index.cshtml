@@ -16,20 +16,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Department[0].DepartmentName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department[0].Budget)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Department[0].FoundedDate)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Department[0].RowVersion)
+                @Html.DisplayNameFor(model => model.Department[0].DepartmentChairName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Department[0].DepartmentChair)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department[0].RowVersion)
+
             </th>
         </tr>
     </thead>
@@ -39,21 +35,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DepartmentName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Budget)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.FoundedDate)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.RowVersion)
+                @Html.DisplayFor(modelItem => item.DepartmentChairName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentChair.FirstName)
-            </td>
-            <td>
-                @item.RowVersion[7]
-            </td>
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |

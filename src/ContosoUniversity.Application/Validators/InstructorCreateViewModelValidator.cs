@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ContosoUniversity.Application.Validators
 {
-    public class InstructorCreateViewModelValidator : AbstractValidator<InstructorCreateViewModel>
+    public class InstructorCreateViewModelValidator : AbstractValidator<InstructorViewModel>
     {
         /// <summary>
         /// Fluent Validation validator for the Instructor Create View Model Entity. 

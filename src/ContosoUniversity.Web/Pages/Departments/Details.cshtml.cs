@@ -1,8 +1,9 @@
-﻿using System;
-using ContosoUniversity.Core.Entities;
+﻿using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Threading.Tasks;
 
 namespace ContosoUniversity.Web.Pages.Departments
@@ -10,13 +11,16 @@ namespace ContosoUniversity.Web.Pages.Departments
     public class DetailsModel : PageModel
     {
         private readonly IDepartmentRepository _repository;
+        private readonly IMapper _mapper;
 
-        public DetailsModel(IDepartmentRepository repository)
+        public DetailsModel(IDepartmentRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public Department Department { get; set; }
+        [BindProperty]
+        public DepartmentViewModel Department { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -25,7 +29,7 @@ namespace ContosoUniversity.Web.Pages.Departments
                 return NotFound();
             }
 
-            Department = await _repository.GetDepartmentAsync(id);
+            Department = _mapper.Map<DepartmentViewModel>(await _repository.GetDepartmentAsync(id));
 
             if (Department == null)
             {

@@ -18,7 +18,8 @@ namespace ContosoUniversity.Infrastructure.Repositories
         public async Task<List<Instructor>> GetInstructorsAsync()
         {
             return await DbContext.Instructors
-                .OrderBy(a=>a.FullName)
+                .OrderBy(a => a.LastName)
+                .ThenBy(b => b.FirstName)
                 .ToListAsync();
         }
 

@@ -4,42 +4,38 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h2>Details</h2>
-
+<br />
+<br />
+<h2>Department Details</h2>
+<hr />
 <div>
-    <h4>Department</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+    <dl class="row">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Department.DepartmentName)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Department.DepartmentName)
         </dd>
-        <dt>
+        
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Department.Budget)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Department.Budget)
         </dd>
-        <dt>
+        
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Department.FoundedDate)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Department.FoundedDate)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.RowVersion)
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department.DepartmentChairName)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.RowVersion)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.DepartmentChair)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.DepartmentChair.FirstName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.DepartmentChairName)
         </dd>
     </dl>
 </div>
