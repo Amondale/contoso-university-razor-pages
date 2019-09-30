@@ -199,4 +199,7 @@
   <ItemGroup>
     <None Include="Migrations\1.1.0-Changes\00006_20190913_1116_ReAddForeignKeys.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0-Changes\00007_20190930_1502_MoreDMLForDatabase.sql" />
+  </ItemGroup>
 </Project>
