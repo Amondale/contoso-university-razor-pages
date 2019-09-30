@@ -12,9 +12,9 @@ namespace ContosoUniversity.Web.Pages.Instructors
     public class Create : PageModel
     {
         [BindProperty]
-        public InstructorViewModel Instructor { get; set; }
+        public InstructorCreateViewModel Instructor { get; set; }
 
-        public List<AssignedCourseViewModel> AssignedCourseViewModels;
+        //public List<AssignedCourseViewModel> AssignedCourseViewModels;
 
         private readonly IInstructorRepository _instructorRepository;
         private readonly ICourseRepository _courseRepository;
@@ -30,8 +30,8 @@ namespace ContosoUniversity.Web.Pages.Instructors
         public IActionResult OnGet()
         {
             var emptyInstructor = new Instructor();
-            Instructor = _mapper.Map<InstructorViewModel>(emptyInstructor);
-            AssignedCourseViewModels = _instructorRepository.GetAssignedCourseData(emptyInstructor);
+            Instructor = _mapper.Map<InstructorCreateViewModel>(emptyInstructor);
+
             return Page();
         }
 
@@ -57,11 +57,11 @@ namespace ContosoUniversity.Web.Pages.Instructors
                                     i => i.HireDate))
             {
                 var createdInstructor = await _instructorRepository.AddAsync(newInstructor);
-                if (Instructor.SelectedCourses != null)
-                {
-                    createdInstructor.HandleCourses(Instructor.SelectedCourses, courses);
-                    await _instructorRepository.UpdateAsync(createdInstructor);
-                }
+                //if (Instructor.SelectedCourses != null)
+                //{
+                //    createdInstructor.HandleCourses(Instructor.SelectedCourses, courses);
+                //    await _instructorRepository.UpdateAsync(createdInstructor);
+                //}
                 return RedirectToPage("./Index");
             }
 

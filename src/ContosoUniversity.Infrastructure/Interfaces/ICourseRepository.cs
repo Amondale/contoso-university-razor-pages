@@ -11,5 +11,8 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         Task<Course> GetCourseAsync(Guid? id);
 
+        Task<List<Course>> GetCoursesAndDepartmentsAsync();
+
+        IReadOnlyList<Course> ListAll();
     }
 }

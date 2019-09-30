@@ -14,8 +14,6 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
 
             builder.Property(a => a.Id).HasColumnName("InstructorGuid");
 
-            builder.Ignore(a => a.SelectedCourses);
-
             builder.Ignore(a => a.FullName);
 
             builder.Property(a => a.LastName).IsRequired();

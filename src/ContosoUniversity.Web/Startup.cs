@@ -48,6 +48,7 @@ namespace ContosoUniversity.Web
                     o.RegisterValidatorsFromAssemblyContaining<DepartmentValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<InstructorViewModelValidator>();
+                    o.RegisterValidatorsFromAssemblyContaining<InstructorCreateViewModelValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<StudentValidator>();
                     o.RegisterValidatorsFromAssemblyContaining<StudentViewModelValidator>();
                 }); ;

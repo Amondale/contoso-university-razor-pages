@@ -14,8 +14,6 @@ namespace ContosoUniversity.Web.Pages.Instructors
         [BindProperty]
         public Instructor Instructor { get; set; }
 
-        public List<AssignedCourseViewModel> AssignedCourseViewModels;
-
         private readonly IInstructorRepository _instructorRepository;
         private readonly ICourseRepository _courseRepository;
 
@@ -34,7 +32,6 @@ namespace ContosoUniversity.Web.Pages.Instructors
                 return NotFound();
             }
 
-            AssignedCourseViewModels = _instructorRepository.GetAssignedCourseData(Instructor);
             return Page();
         }
 
@@ -46,7 +43,6 @@ namespace ContosoUniversity.Web.Pages.Instructors
             }
 
             var instructorToUpdate = await _instructorRepository.GetInstructorWithChildrenAsync(id);
-            var courses = await _courseRepository.ListAllAsync();
 
             if (await TryUpdateModelAsync<Instructor>(
                 instructorToUpdate,
@@ -55,8 +51,6 @@ namespace ContosoUniversity.Web.Pages.Instructors
                 i => i.HireDate, i => i.OfficeLocation))
             {
 
-                await _instructorRepository.UpdateAsync(instructorToUpdate);
-                instructorToUpdate.HandleCourses(Instructor.SelectedCourses, courses);
                 await _instructorRepository.UpdateAsync(instructorToUpdate);
                 return RedirectToPage("./Index");
             }

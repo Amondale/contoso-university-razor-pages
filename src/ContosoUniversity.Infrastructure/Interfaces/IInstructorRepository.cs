@@ -18,6 +18,8 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         Task<Instructor> GetInstructorWithChildrenAsync(Guid? id);
 
-        List<AssignedCourseViewModel> GetAssignedCourseData(Instructor instructor);
+        Task<List<CourseAssignment>> GetAssignedCourseData(Guid? id);
+
+        Task UpdateCourses(Guid id, string[] selectedCourses);
     }
 }

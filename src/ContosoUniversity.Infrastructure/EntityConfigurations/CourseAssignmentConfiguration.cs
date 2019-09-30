@@ -25,11 +25,11 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
             builder.Property(a => a.AuditUpdateDateTime).IsRequired();
 
             builder.HasOne(a => a.Course)
-                .WithMany(b => b.CourseAssignments)
+                .WithMany(b=>b.CourseAssignments)
                 .HasForeignKey(a => a.CourseId);
 
             builder.HasOne(a => a.Instructor)
-                .WithMany(b => b.CourseAssignments)
+                .WithMany(c=>c.CourseAssignments)
                 .HasForeignKey(a => a.InstructorId);
         }
     }

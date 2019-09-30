@@ -1,9 +1,8 @@
-﻿using System;
-using ContosoUniversity.Application.ViewModels;
-using ContosoUniversity.Core.Entities;
+﻿using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +32,8 @@ namespace ContosoUniversity.Infrastructure.Repositories
                 .ThenInclude(i => i.Course)
                 .ThenInclude(i => i.Enrollments)
                 .ThenInclude(i => i.Student)
-            .OrderBy(i => i.LastName)
+                .AsNoTracking()
+                .OrderBy(i => i.LastName)
                 .ToListAsync();
         }
 
@@ -58,16 +58,23 @@ namespace ContosoUniversity.Infrastructure.Repositories
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
 
-        public List<AssignedCourseViewModel> GetAssignedCourseData(Instructor instructor)
+        public async Task<List<CourseAssignment>> GetAssignedCourseData(Guid? id)
         {
-            var allCourses = DbContext.Courses;
-            var instructorCourses = new HashSet<Guid>(instructor.CourseAssignments.Select(c => c.CourseId));
-            return allCourses.Select(course => new AssignedCourseViewModel
+            return await DbContext.CourseAssignments.Where(i => i.InstructorId == id).AsNoTracking().ToListAsync();
+        }
+
+        public async Task UpdateCourses(Guid id, string[] selectedCourses)
+        {
+            DbContext.CourseAssignments.RemoveRange(DbContext.CourseAssignments.Where(i => i.InstructorId == id));
+            
+            await DbContext.SaveChangesAsync();
+
+            foreach (var temp in selectedCourses)
             {
-                CourseId = course.Id,
-                CourseTitle = course.Title,
-                HasInstructorAssigned = instructorCourses.Contains(course.Id)
-            }).ToList();
+                DbContext.CourseAssignments.Add(new CourseAssignment{InstructorId = id, CourseId = Guid.Parse(temp)});
+            }
+            await DbContext.SaveChangesAsync();
+
         }
     }
 }

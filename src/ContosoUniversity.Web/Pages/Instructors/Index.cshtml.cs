@@ -20,14 +20,16 @@ namespace ContosoUniversity.Web.Pages.Instructors
             _mapper = mapper;
         }
         public InstructorsIndexViewModel InstructorsIndex { get; set; }
+        
         public Guid InstructorId { get; private set; }
+        
         public Guid CourseId { get; private set; }
 
         public async Task OnGetAsync(Guid? id, Guid? courseId)
         {
             InstructorsIndex = new InstructorsIndexViewModel
             {
-                Instructors = _mapper.Map<List<InstructorViewModel>>( await _repository.GetInstructorsWithChildrenAsync())
+                Instructors = _mapper.Map<List<InstructorViewModel>>(await _repository.GetInstructorsWithChildrenAsync())
             };
 
             if (id != null)

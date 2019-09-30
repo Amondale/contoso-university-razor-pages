@@ -1,0 +1,42 @@
+﻿using ContosoUniversity.Application.ViewModels;
+using FluentValidation;
+
+namespace ContosoUniversity.Application.Validators
+{
+    public class InstructorCreateViewModelValidator : AbstractValidator<InstructorCreateViewModel>
+    {
+        /// <summary>
+        /// Fluent Validation validator for the Instructor Create View Model Entity. 
+        /// </summary>
+        public InstructorCreateViewModelValidator()
+        {
+            RuleFor(a => a.LastName)
+                .NotNull()
+                .WithMessage("Last name cannot be empty.")
+                .NotEmpty()
+                .WithMessage("Last name cannot be empty.")
+                .Length(3, 100)
+                .WithMessage("Last name must be between 3 - 100 characters in length.");
+
+            RuleFor(a => a.FirstName)
+                .NotNull()
+                .WithMessage("First name cannot be empty.")
+                .NotEmpty()
+                .WithMessage("First name cannot be empty.")
+                .Length(3, 100)
+                .WithMessage("First name must be between 3 - 100 characters in length.");
+
+            RuleFor(a => a.FirstName)
+                .NotNull()
+                .WithMessage("First name cannot be empty.")
+                .NotEmpty()
+                .WithMessage("First name cannot be empty.")
+                .Length(3, 100)
+                .WithMessage("First name must be between 3 - 100 characters in length.");
+
+            RuleFor(a => a.MiddleName)
+                .MaximumLength(100)
+                .WithMessage("Middle name cannot exceed 100 characters in length.");
+        }
+    }
+}

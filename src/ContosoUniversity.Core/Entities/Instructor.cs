@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace ContosoUniversity.Core.Entities
 {
@@ -33,38 +32,5 @@ namespace ContosoUniversity.Core.Entities
 
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
-        public string[] SelectedCourses { get; set; }
-
-        public void HandleCourses(string[] selectedCourses, IEnumerable<Course> courses)
-        {
-            if (selectedCourses == null || selectedCourses.Length == 0 || CourseAssignments == null)
-            {
-                this.CourseAssignments = new List<CourseAssignment>();
-                return;
-            }
-
-            var selectedCoursesHs = new HashSet<string>(selectedCourses);
-            var instructorCourses = new HashSet<Guid>
-                (CourseAssignments.Select(c => c.CourseId));
-
-            foreach (var course in courses)
-            {
-                if (selectedCoursesHs.Contains(course.Id.ToString()))
-                {
-                    if (!instructorCourses.Contains(course.Id))
-                    {
-                        CourseAssignments.Add(new CourseAssignment { Course = course, Instructor = this });
-                    }
-                }
-                else
-                {
-                    if (instructorCourses.Contains(course.Id))
-                    {
-                        var toRemove = CourseAssignments.Single(ci => ci.CourseId == course.Id);
-                        CourseAssignments.Remove(toRemove);
-                    }
-                }
-            }
-        }
     }
 }

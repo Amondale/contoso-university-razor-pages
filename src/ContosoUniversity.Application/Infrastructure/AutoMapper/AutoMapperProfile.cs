@@ -16,11 +16,13 @@ namespace ContosoUniversity.Application.Infrastructure.AutoMapper
                 .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.DepartmentName));
 
             CreateMap<Instructor, InstructorViewModel>();
-
+            CreateMap<Instructor, InstructorCreateViewModel>();
+                
             // ViewModel to Domain
             CreateMap<StudentViewModel, Student>();
             CreateMap<CourseViewModel, Course>();
             CreateMap<InstructorViewModel, Instructor>();
+            CreateMap<InstructorCreateViewModel, Instructor>();
 
             LoadStandardMappings();
             LoadCustomMappings();

@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page "{id:Guid?}"
 @model ContosoUniversity.Web.Pages.Instructors.IndexModel
 
 @{
@@ -16,7 +16,6 @@
             <th>Last Name</th>
             <th>First Name</th>
             <th>Hire Date</th>
-            <th>Office</th>
             <th>Courses</th>
             <th></th>
         </tr>
@@ -40,9 +39,6 @@
                     @Html.DisplayFor(modelItem => item.HireDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OfficeLocation)
-                </td>
-                <td>
                     @{
                         foreach (var course in item.CourseAssignments)
                         {
@@ -52,6 +48,7 @@
                 </td>
                 <td>
                     <a asp-page="./Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-page="./AssignCourses" asp-route-id="@item.Id">Assign Courses</a> |
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -64,13 +61,12 @@
 
 @if (Model.InstructorsIndex.Courses != null)
 {
-    <h3>Courses Taught by Selected Instructor</h3>
+    <h4>Courses Taught by Selected Instructor</h4>
     <table class="table">
         <tr>
-            <th></th>
-            <th>Number</th>
             <th>Title</th>
             <th>Department</th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model.InstructorsIndex.Courses)
@@ -82,16 +78,13 @@
             }
             <tr class="@selectedRow">
                 <td>
-                    <a asp-page="./Index" asp-route-courseID="@item.Id">Select</a>
-                </td>
-                <td>
-                    @item.Id
-                </td>
-                <td>
                     @item.Title
                 </td>
                 <td>
                     @item.Department.DepartmentName
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-courseId="@item.Id">Select</a>
                 </td>
             </tr>
         }
@@ -101,9 +94,9 @@
 
 @if (Model.InstructorsIndex.Enrollments != null)
 {
-<h3>
+<h4>
     Students Enrolled in Selected Course
-</h3>
+</h4>
     <table class="table">
         <tr>
             <th>Name</th>
