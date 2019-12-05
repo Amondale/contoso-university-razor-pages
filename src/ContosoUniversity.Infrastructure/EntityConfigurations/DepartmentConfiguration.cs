@@ -10,9 +10,19 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
         {
             builder.ToTable("Department", "dbo");
 
-            builder.HasKey(a => a.DepartmentID);
+            builder.HasKey(a => a.Id);
+
+            builder.Property(a => a.Id).HasColumnName("DepartmentGuid");
+
+            builder.Property(a => a.DepartmentChairId).HasColumnName("DepartmentChairGuid");
 
             builder.Property(a => a.Budget).HasColumnType("money");
+
+            builder.Property(a => a.RowVersion).HasColumnName("RecordVersion");
+
+            builder.HasOne(a => a.DepartmentChair)
+                .WithMany()
+                .HasForeignKey(a => a.DepartmentChairId);
         }
     }
 }

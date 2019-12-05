@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContosoUniversity.Application.Validators;
+using ContosoUniversity.Common;
 using FluentValidation.TestHelper;
 using Xunit;
 
@@ -21,43 +22,43 @@ namespace ContosoUniversity.Application.Tests.Validators
         [Fact]
         public void ValidationFailsWhenDepartmentTitleNull()
         {
-            _departmentValidator.ShouldHaveValidationErrorFor(m => m.Name, null as string);
+            _departmentValidator.ShouldHaveValidationErrorFor(m => m.DepartmentName, null as string);
         }
 
         [Fact]
         public void ValidationFailsWhenDepartmentTitleEmpty()
         {
-            _departmentValidator.ShouldHaveValidationErrorFor(m => m.Name, "");
+            _departmentValidator.ShouldHaveValidationErrorFor(m => m.DepartmentName, string.Empty);
         }
 
         [Fact]
         public void ValidationFailsWhenDepartmentTitleTooShort()
         {
-            _departmentValidator.ShouldHaveValidationErrorFor(m => m.Name, "AA");
+            _departmentValidator.ShouldHaveValidationErrorFor(m => m.DepartmentName, StringGenerator.GenerateRandomString(2));
         }
 
         [Fact]
         public void ValidationFailsWhenDepartmentTitleTooLong()
         {
-            _departmentValidator.ShouldHaveValidationErrorFor(m => m.Name, "AAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBCCCCCCCCCCD");
+            _departmentValidator.ShouldHaveValidationErrorFor(m => m.DepartmentName, StringGenerator.GenerateRandomString(101));
         }
 
         [Fact]
         public void ValidationSucceedsWhenDepartmentTitleShortLength()
         {
-            _departmentValidator.ShouldNotHaveValidationErrorFor(m => m.Name, "AAA");
+            _departmentValidator.ShouldNotHaveValidationErrorFor(m => m.DepartmentName, StringGenerator.GenerateRandomString(3));
         }
 
         [Fact]
         public void ValidationSucceedsWhenDepartmentTitleAverageLength()
         {
-            _departmentValidator.ShouldNotHaveValidationErrorFor(m => m.Name, "AAAAAAAAAAAAAAAAAAAABBBBB");
+            _departmentValidator.ShouldNotHaveValidationErrorFor(m => m.DepartmentName, StringGenerator.GenerateRandomString(25));
         }
 
         [Fact]
         public void ValidationSucceedsWhenDepartmentTitleLongLength()
         {
-            _departmentValidator.ShouldNotHaveValidationErrorFor(m => m.Name, "AAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBCCCCCCCCCC");
+            _departmentValidator.ShouldNotHaveValidationErrorFor(m => m.DepartmentName, StringGenerator.GenerateRandomString(100));
         }
     }
 }

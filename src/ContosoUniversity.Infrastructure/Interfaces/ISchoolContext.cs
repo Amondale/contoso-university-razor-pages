@@ -10,7 +10,6 @@ namespace ContosoUniversity.Infrastructure.Interfaces
         DbSet<Course> Courses { get; set; }
         DbSet<Department> Departments { get; set; }
         DbSet<Instructor> Instructors { get; set; }
-        DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         DbSet<CourseAssignment> CourseAssignments { get; set; }
     }
 }

@@ -1,8 +1,10 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.DbContexts;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ContosoUniversity.Infrastructure.Repositories
@@ -15,20 +17,41 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Course>> GetCoursesAsync()
         {
-            return await _dbContext.Courses
+            return await DbContext.Courses
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<Course> GetCourseAsync(int? courseId)
+        public async Task<List<Course>> GetCoursesAndDepartmentsAsync()
         {
-            return await _dbContext.Courses
+            return await DbContext.Courses
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == courseId);
+                .OrderBy(d=> d.Department.DepartmentName)
+                .ThenBy(c=>c.Title)
+                .ToListAsync();
+        }
+
+        public async Task<Course> GetCourseAsync(Guid? id)
+        {
+            return await DbContext.Courses
+                .AsNoTracking()
+                .Include(c => c.Department)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public IReadOnlyList<Course> ListAll()
+        {
+            return DbContext.Courses
+                .AsNoTracking()
+                .Include(c => c.Department)
+                .OrderBy( a=> a.Department.DepartmentName)
+                .ThenBy(b => b.Title)
+                .ToList();
         }
 
     }

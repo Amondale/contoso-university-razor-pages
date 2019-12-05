@@ -1,4 +1,6 @@
-﻿using ContosoUniversity.Application.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
@@ -10,33 +12,37 @@ namespace ContosoUniversity.Web.Pages.Instructors
     public class IndexModel : PageModel
     {
         private readonly IInstructorRepository _repository;
+        private readonly IMapper _mapper;
 
-        public IndexModel(IInstructorRepository repository)
+        public IndexModel(IInstructorRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         public InstructorsIndexViewModel InstructorsIndex { get; set; }
-        public int InstructorId { get; private set; }
-        public int CourseId { get; private set; }
+        
+        public Guid InstructorId { get; private set; }
+        
+        public Guid CourseId { get; private set; }
 
-        public async Task OnGetAsync(int? id, int? courseID)
+        public async Task OnGetAsync(Guid? id, Guid? courseId)
         {
             InstructorsIndex = new InstructorsIndexViewModel
             {
-                Instructors = await _repository.GetInstructorsWithChildrenAsync()
+                Instructors = _mapper.Map<List<InstructorViewModel>>(await _repository.GetInstructorsWithChildrenAsync())
             };
 
             if (id != null)
             {
                 InstructorId = id.Value;
-                var instructor = InstructorsIndex.Instructors.Single(i => i.ID == id.Value);
+                var instructor = InstructorsIndex.Instructors.Single(i => i.Id == id.Value);
                 InstructorsIndex.Courses = instructor.CourseAssignments.Select(s => s.Course);
             }
 
-            if (courseID != null)
+            if (courseId != null)
             {
-                CourseId = courseID.Value;
-                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.CourseID == courseID).Enrollments;
+                CourseId = courseId.Value;
+                InstructorsIndex.Enrollments = InstructorsIndex.Courses.Single(x => x.Id == courseId).Enrollments;
             }
         }
     }
