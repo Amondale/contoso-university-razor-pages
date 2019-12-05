@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,7 +21,7 @@ namespace ContosoUniversity.Web.Pages.Instructors
         [BindProperty]
         public Instructor Instructor { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             Instructor = await _instructorRepository.GetInstructorWithChildrenAsync(id);
 
@@ -31,17 +32,18 @@ namespace ContosoUniversity.Web.Pages.Instructors
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             var instructor = await _instructorRepository.GetInstructorWithChildrenAsync(id);
 
-            var departments = await _departmentRepository.GetDepartmentsFromInstructor(id);
+            //TODO
+            //var departments = await _departmentRepository.GetDepartmentsFromInstructor(id);
 
-            foreach (var d in departments)
-            {
-                d.InstructorID = null;
-                await _departmentRepository.UpdateAsync(d);
-            }
+            //foreach (var d in departments)
+            //{
+            //    d.DepartmentChairId = null;
+            //    await _departmentRepository.UpdateAsync(d);
+            //}
 
             await _instructorRepository.DeleteAsync(instructor);
             return RedirectToPage("./Index");

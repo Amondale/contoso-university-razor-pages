@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,8 +11,8 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         List<Department> GetDepartments();
 
-        Task<Department> GetDepartmentAsync(int? departmentId);
+        Task<Department> GetDepartmentAsync(Guid? id);
 
-        Task<List<Department>> GetDepartmentsFromInstructor(int? instructorId);
+        Task<List<Department>> GetDepartmentsFromInstructor(Guid? instructorId);
     }
 }

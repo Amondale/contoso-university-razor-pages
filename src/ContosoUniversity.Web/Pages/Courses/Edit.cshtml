@@ -13,27 +13,33 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Course.CourseID" />
+
+            <input type="hidden" asp-for="Course.Id" />
+            <input type="hidden" asp-for="Course.RowVersion" />
+            <input type="hidden" asp-for="Course.AuditCreateDateTime" />
+            <input type="hidden" asp-for="Course.AuditUpdateDateTime" />
+
             <div class="form-group">
-                <label asp-for="Course.CourseID" class="control-label"></label>
-                <div>@Html.DisplayFor(model => model.Course.CourseID)</div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Course.Title" class="control-label"></label>
+                <label asp-for="Course.Title" class="col-form-label"></label>
                 <input asp-for="Course.Title" class="form-control" />
                 <span asp-validation-for="Course.Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Course.Credits" class="control-label"></label>
+                <label asp-for="Course.Credits" class="col-form-label"></label>
                 <input asp-for="Course.Credits" class="form-control" />
                 <span asp-validation-for="Course.Credits" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Course.Department" class="control-label"></label>
-                <select asp-for="Course.DepartmentID" class="form-control"
-                        asp-items="@Model.DepartmentNameSL"></select>
-                <span asp-validation-for="Course.DepartmentID" class="text-danger"></span>
+                <label asp-for="Course.DepartmentName" class="col-form-label"></label>
+                <select asp-for="Course.DepartmentId" class="form-control"
+                        asp-items="@Model.DepartmentSelectList">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="Course.DepartmentId" class="text-danger" />
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

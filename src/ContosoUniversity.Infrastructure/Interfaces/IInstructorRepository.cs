@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Application.ViewModels;
+﻿using System;
+using ContosoUniversity.Application.ViewModels;
 using ContosoUniversity.Core.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,10 +14,12 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         List<Instructor> GetInstructors();
 
-        Task<Instructor> GetInstructorAsync(int? instructorId);
+        Task<Instructor> GetInstructorAsync(Guid? id);
 
-        Task<Instructor> GetInstructorWithChildrenAsync(int? instructorId);
+        Task<Instructor> GetInstructorWithChildrenAsync(Guid? id);
 
-        List<AssignedCourseViewModel> GetAssignedCourseData(Instructor instructor);
+        Task<List<CourseAssignment>> GetAssignedCourseData(Guid? id);
+
+        Task UpdateCourses(Guid id, string[] selectedCourses);
     }
 }

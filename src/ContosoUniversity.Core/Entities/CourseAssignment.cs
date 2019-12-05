@@ -1,10 +1,15 @@
-﻿namespace ContosoUniversity.Core.Entities
+﻿using System;
+
+namespace ContosoUniversity.Core.Entities
 {
-    public class CourseAssignment
+    public class CourseAssignment : BaseEntity
     {
-        public int InstructorId { get; set; }
-        public int CourseId { get; set; }
+        public Guid InstructorId { get; set; }
+
+        public Guid CourseId { get; set; }
+
         public Instructor Instructor { get; set; }
+
         public Course Course { get; set; }
     }
 }

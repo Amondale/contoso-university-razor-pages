@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using ContosoUniversity.Application.ViewModels;
 
 namespace ContosoUniversity.Web.Pages.Departments
 {
@@ -13,33 +16,35 @@ namespace ContosoUniversity.Web.Pages.Departments
     {
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IInstructorRepository _instructorRepository;
+        private readonly IMapper _mapper;
 
-        public EditModel(IDepartmentRepository departmentRepository, IInstructorRepository instructorRepository)
+        public EditModel(IDepartmentRepository departmentRepository, IInstructorRepository instructorRepository, IMapper mapper)
         {
             _departmentRepository = departmentRepository;
             _instructorRepository = instructorRepository;
+            _mapper = mapper;
         }
 
         [BindProperty]
-        public Department Department { get; set; }
-        
-        public SelectList InstructorNameSL { get; set; }
+        public DepartmentViewModel Department { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public SelectList DepartmentChairSelectList { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            Department = await _departmentRepository.GetDepartmentAsync(id);
+            Department = _mapper.Map<DepartmentViewModel>(await _departmentRepository.GetDepartmentAsync(id));
 
             if (Department == null)
             {
                 return NotFound();
             }
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName");
+            DepartmentChairSelectList = new SelectList(await _instructorRepository.GetInstructorsAsync(), "Id", "FullName");
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             if (!ModelState.IsValid)
             {
@@ -68,7 +73,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             if (await TryUpdateModelAsync<Department>(
                 departmentToUpdate,
                 "Department",
-                s => s.Name, s => s.StartDate, s => s.Budget, s => s.InstructorID))
+                s => s.DepartmentName, s => s.FoundedDate, s => s.Budget, s => s.DepartmentChairId))
             {
                 try
                 {
@@ -88,10 +93,10 @@ namespace ContosoUniversity.Web.Pages.Departments
                     }
 
                     var dbValues = (Department)databaseEntry.ToObject();
+
                     await SetDbErrorMessage(dbValues, clientValues);
 
-                    // Save the current RowVersion so next postback
-                    // matches unless an new concurrency issue happens.
+                    // Save the current RowVersion so next postback matches unless an new concurrency issue happens.
                     Department.RowVersion = (byte[])dbValues.RowVersion;
 
                     // Must clear the model error for the next postback.
@@ -99,7 +104,8 @@ namespace ContosoUniversity.Web.Pages.Departments
                 }
             }
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", departmentToUpdate.InstructorID);
+            DepartmentChairSelectList = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName", departmentToUpdate.DepartmentChairId);
+
             return Page();
         }
 
@@ -108,7 +114,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             // ModelState contains the posted data because of the deletion error and will overide the Department instance values when displaying Page().
             ModelState.AddModelError(string.Empty,"Unable to save. The department was deleted by another user.");
 
-            InstructorNameSL = new SelectList(_instructorRepository.GetInstructors(), "ID", "FullName", Department.InstructorID);
+            DepartmentChairSelectList = new SelectList(_instructorRepository.GetInstructors(), "Id", "FullName", Department.DepartmentChairId);
 
             return Page();
         }
@@ -116,24 +122,24 @@ namespace ContosoUniversity.Web.Pages.Departments
         private async Task SetDbErrorMessage(Department dbValues, Department clientValues)
         {
 
-            if (dbValues.Name != clientValues.Name)
+            if (dbValues.DepartmentName != clientValues.DepartmentName)
             {
                 ModelState.AddModelError("Department.Name",
-                    $"Current value: {dbValues.Name}");
+                    $"Current value: {dbValues.DepartmentName}");
             }
             if (dbValues.Budget != clientValues.Budget)
             {
                 ModelState.AddModelError("Department.Budget",
                     $"Current value: {dbValues.Budget:c}");
             }
-            if (dbValues.StartDate != clientValues.StartDate)
+            if (dbValues.FoundedDate != clientValues.FoundedDate)
             {
                 ModelState.AddModelError("Department.StartDate",
-                    $"Current value: {dbValues.StartDate:d}");
+                    $"Current value: {dbValues.FoundedDate:d}");
             }
-            if (dbValues.InstructorID != clientValues.InstructorID)
+            if (dbValues.DepartmentChairId != clientValues.DepartmentChairId)
             {
-                Instructor dbInstructor = await _instructorRepository.GetInstructorWithChildrenAsync(dbValues.InstructorID ?? 0);
+                Instructor dbInstructor = await _instructorRepository.GetInstructorWithChildrenAsync(dbValues.DepartmentChairId ?? new Guid());
                 ModelState.AddModelError("Department.InstructorID",
                     $"Current value: {dbInstructor?.FullName}");
             }

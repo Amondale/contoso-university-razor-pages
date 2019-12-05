@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using X.PagedList;
@@ -12,8 +13,8 @@ namespace ContosoUniversity.Infrastructure.Interfaces
 
         List<Student> GetStudents();
 
-        Task<Student> GetStudentAsync(int? studentId);
+        Task<Student> GetStudentAsync(Guid? id);
 
-        Task<IPagedList<Student>> GetStudentsByFilter(string searchString, string sortOrder, int? pageIndex);
+        Task<List<Student>> GetStudentsByFilter(string searchString, string sortOrder);
     }
 }

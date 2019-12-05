@@ -4,46 +4,42 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h2>Details</h2>
-
+<br />
+<br />
+<h2>Department Details</h2>
+<hr />
 <div>
-    <h4>Department</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Name)
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department.DepartmentName)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.Name)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.DepartmentName)
         </dd>
-        <dt>
+        
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Department.Budget)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Department.Budget)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.StartDate)
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department.FoundedDate)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.StartDate)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.FoundedDate)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.RowVersion)
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department.DepartmentChairName)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.RowVersion)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Administrator)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.Administrator.FirstMidName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.DepartmentChairName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Department.DepartmentID">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Department.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

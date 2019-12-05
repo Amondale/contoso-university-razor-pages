@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContosoUniversity.Application.Validators;
+using ContosoUniversity.Common;
 using FluentValidation.TestHelper;
 using Xunit;
 
@@ -15,6 +16,7 @@ namespace ContosoUniversity.Application.Tests.Validators
         public InstructorValidatorTests()
         {
             _instructorValidator = new InstructorValidator();
+            
         }
 
         [Fact]
@@ -26,79 +28,111 @@ namespace ContosoUniversity.Application.Tests.Validators
         [Fact]
         public void ValidationFailsWhenInstructorLastNameEmpty()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.LastName, "");
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.LastName, string.Empty);
         }
 
         [Fact]
         public void ValidationFailsWhenInstructorLastNameTooShort()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.LastName, "AA");
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.LastName, StringGenerator.GenerateRandomString(2));
         }
 
         [Fact]
         public void ValidationFailsWhenInstructorLastNameTooLong()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.LastName, "AAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBCCCCCCCCCCD");
+
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.LastName, StringGenerator.GenerateRandomString(101));
         }
 
         [Fact]
         public void ValidationSucceedsWhenInstructorLastNameShortLength()
         {
-            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.LastName, "AAA");
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.LastName, StringGenerator.GenerateRandomString(3));
         }
 
         [Fact]
         public void ValidationSucceedsWhenInstructorLastNameAverageLength()
         {
-            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.LastName, "AAAAAAAAAAAAAAAAAAAABBBBB");
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.LastName, StringGenerator.GenerateRandomString(25));
         }
 
         [Fact]
         public void ValidationSucceedsWhenInstructorLastNameLongLength()
         {
-            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.LastName, "AAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBCCCCCCCCCC");
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.LastName, StringGenerator.GenerateRandomString(100));
         }
 
         [Fact]
-        public void ValidationFailsWhenInstructorFirstMidNameNull()
+        public void ValidationFailsWhenInstructorFirstNameNull()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstMidName, null as string);
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstName, null as string);
         }
 
         [Fact]
-        public void ValidationFailsWhenInstructorFirstMidNameEmpty()
+        public void ValidationFailsWhenInstructorFirstNameEmpty()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstMidName, "");
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstName, string.Empty);
         }
 
         [Fact]
-        public void ValidationFailsWhenInstructorFirstMidNameTooShort()
+        public void ValidationFailsWhenInstructorFirstNameTooShort()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstMidName, "AA");
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstName, StringGenerator.GenerateRandomString(2));
         }
 
         [Fact]
-        public void ValidationFailsWhenInstructorFirstMidNameTooLong()
+        public void ValidationFailsWhenInstructorFirstNameTooLong()
         {
-            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstMidName, "AAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBCCCCCCCCCCD");
+            _instructorValidator.ShouldHaveValidationErrorFor(m => m.FirstName, StringGenerator.GenerateRandomString(101));
         }
 
         [Fact]
-        public void ValidationSucceedsWhenInstructorFirstMidNameShortLength()
+        public void ValidationSucceedsWhenInstructorFirstNameShortLength()
         {
-            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.FirstMidName, "AAA");
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.FirstName, StringGenerator.GenerateRandomString(3));
         }
 
         [Fact]
-        public void ValidationSucceedsWhenInstructorFirstMidNameAverageLength()
+        public void ValidationSucceedsWhenInstructorFirstNameAverageLength()
         {
-            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.FirstMidName, "AAAAAAAAAAAAAAAAAAAABBBBB");
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.FirstName, StringGenerator.GenerateRandomString(25));
         }
 
         [Fact]
-        public void ValidationSucceedsWhenInstructorFirstMidNameLongLength()
+        public void ValidationSucceedsWhenInstructorFirstNameLongLength()
         {
-            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.FirstMidName, "AAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBCCCCCCCCCC");
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.FirstName, StringGenerator.GenerateRandomString(100));
+        }
+
+
+        [Fact]
+        public void ValidationSucceedsWhenInstructorMiddleNameNull()
+        {
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.MiddleName, null as string);
+        }
+
+        [Fact]
+        public void ValidationSucceedsWhenInstructorMiddleNameEmpty()
+        {
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.MiddleName, string.Empty);
+        }
+
+        [Fact]
+        public void ValidationSucceedsWhenInstructorMiddleNameShortLength()
+        {
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.MiddleName, StringGenerator.GenerateRandomString(3));
+        }
+
+        [Fact]
+        public void ValidationSucceedsWhenInstructorMiddleNameAverageLength()
+        {
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.MiddleName, StringGenerator.GenerateRandomString(25));
+        }
+
+        [Fact]
+        public void ValidationSucceedsWhenInstructorMiddleNameLongLength()
+        {
+            _instructorValidator.ShouldNotHaveValidationErrorFor(m => m.MiddleName, StringGenerator.GenerateRandomString(100));
         }
     }
 }

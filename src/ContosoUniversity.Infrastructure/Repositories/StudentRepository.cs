@@ -19,7 +19,7 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public async Task<List<Student>> GetStudentsAsync()
         {
-            return await _dbContext.Students
+            return await DbContext.Students
                 .OrderBy(a => a.FullName)
                 .AsNoTracking()
                 .ToListAsync();
@@ -27,45 +27,45 @@ namespace ContosoUniversity.Infrastructure.Repositories
 
         public List<Student> GetStudents()
         {
-            return _dbContext.Students
+            return DbContext.Students
                 .OrderBy(a => a.FullName)
                 .AsNoTracking()
                 .ToList();
         }
 
-        public async Task<Student> GetStudentAsync(int? studentId)
+        public async Task<Student> GetStudentAsync(Guid? id)
         {
-            return await _dbContext.Students
+            return await DbContext.Students
                 .Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == studentId);
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public async Task<IPagedList<Student>> GetStudentsByFilter(string searchString, string sortOrder, int? pageIndex)
+        public async Task<List<Student>> GetStudentsByFilter(string searchString, string sortOrder)
         {
             IQueryable<Student> enumerableStudents;
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                enumerableStudents = _dbContext.Students
-                                    .Where(s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString));
+                enumerableStudents = DbContext.Students
+                                    .Where(s => s.LastName.Contains(searchString) || s.FirstName.Contains(searchString));
             }
             else
             {
-                enumerableStudents = _dbContext.Students;
+                enumerableStudents = DbContext.Students;
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    return await enumerableStudents.OrderByDescending(s => s.LastName).ToPagedListAsync(pageIndex, 10);
+                    return await enumerableStudents.OrderByDescending(s => s.LastName).ToListAsync();
                 case "Date":
-                    return await enumerableStudents.OrderBy(s => s.EnrollmentDate).ToPagedListAsync(pageIndex, 10);
+                    return await enumerableStudents.OrderBy(s => s.EnrollmentDate).ToListAsync();
                 case "date_desc":
-                    return await enumerableStudents.OrderByDescending(s => s.EnrollmentDate).ToPagedListAsync(pageIndex, 10);
+                    return await enumerableStudents.OrderByDescending(s => s.EnrollmentDate).ToListAsync();
                 default:
-                    return await enumerableStudents.OrderBy(s => s.LastName).ToPagedListAsync(pageIndex, 10);
+                    return await enumerableStudents.OrderBy(s => s.LastName).ToListAsync();
             }
         }
     }

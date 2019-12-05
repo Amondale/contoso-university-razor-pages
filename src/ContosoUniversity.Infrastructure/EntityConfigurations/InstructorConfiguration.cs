@@ -10,15 +10,21 @@ namespace ContosoUniversity.Infrastructure.EntityConfigurations
         {
             builder.ToTable("Instructor", "dbo");
 
-            builder.HasKey(a => a.ID);
+            builder.HasKey(a => a.Id);
 
-            builder.Ignore(a => a.SelectedCourses);
+            builder.Property(a => a.Id).HasColumnName("InstructorGuid");
+
+            builder.Ignore(a => a.FullName);
 
             builder.Property(a => a.LastName).IsRequired();
 
-            builder.Property(a => a.FirstMidName).IsRequired();
+            builder.Property(a => a.FirstName).IsRequired();
 
-            builder.Property(a => a.FirstMidName).HasColumnName("FirstName");
+            builder.Property(a => a.AuditCreateDateTime).IsRequired();
+
+            builder.Property(a => a.AuditUpdateDateTime).IsRequired();
+
+            builder.Property(a => a.RowVersion).HasColumnName("RecordVersion");
         }
     }
 }

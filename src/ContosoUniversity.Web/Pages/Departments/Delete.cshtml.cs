@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Core.Entities;
+﻿using System;
+using ContosoUniversity.Core.Entities;
 using ContosoUniversity.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,7 +21,7 @@ namespace ContosoUniversity.Web.Pages.Departments
         public Department Department { get; set; }
         public string ConcurrencyErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id, bool? concurrencyError)
+        public async Task<IActionResult> OnGetAsync(Guid id, bool? concurrencyError)
         {
             Department = await _repository.GetDepartmentAsync(id);
 
@@ -40,7 +41,7 @@ namespace ContosoUniversity.Web.Pages.Departments
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             try
             {

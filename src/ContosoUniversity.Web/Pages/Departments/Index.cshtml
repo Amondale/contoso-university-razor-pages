@@ -14,22 +14,18 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Department[0].Name)
+                @Html.DisplayNameFor(model => model.Department[0].DepartmentName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Department[0].FoundedDate)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Department[0].DepartmentChairName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Department[0].Budget)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department[0].RowVersion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department[0].Administrator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department[0].RowVersion)
+
             </th>
         </tr>
     </thead>
@@ -37,27 +33,21 @@
 @foreach (var item in Model.Department) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.DepartmentName)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Budget)
+                @Html.DisplayFor(modelItem => item.FoundedDate)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
+                @Html.DisplayFor(modelItem => item.DepartmentChairName)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.RowVersion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Administrator.FirstMidName)
-            </td>
-            <td>
-                @item.RowVersion[7]
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.DepartmentID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.DepartmentID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.DepartmentID">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

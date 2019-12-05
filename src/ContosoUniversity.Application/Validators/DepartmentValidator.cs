@@ -10,13 +10,13 @@ namespace ContosoUniversity.Application.Validators
     {
         public DepartmentValidator()
         {
-            RuleFor(a=>a.Name)
+            RuleFor(a=>a.DepartmentName)
                 .NotNull()
                 .WithMessage("Department name cannot be empty.")
                 .NotEmpty()
                 .WithMessage("Department name cannot be empty.")
-                .Length(3,50)
-                .WithMessage("Department name must be between 3 - 50 characters in length.");
+                .Length(3,100)
+                .WithMessage("Department name must be between 3 - 100 characters in length.");
         }
     }
 }
