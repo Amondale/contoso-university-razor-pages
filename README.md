@@ -11,8 +11,8 @@ Use these instructions to get the project up and running.
 ### Prerequisites
 You will need the following tools:
 
-* [Visual Studio Code or 2017](https://www.visualstudio.com/downloads/)
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
+* [Visual Studio Code or 2019](https://www.visualstudio.com/downloads/)
+* [.NET Core SDK 3.0](https://www.microsoft.com/net/download/dotnet-core/3.0)
 * [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 * [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) - Recommended because I'm a data honk who likes control over persistance :-)
 
