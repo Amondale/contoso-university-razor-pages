@@ -1,0 +1,54 @@
+----- executing pre-deployment script "Pre-Deployment\01_Create_Database.sql" -----
+# Beginning transaction
+Changed database context to 'Contoso'.
+# Setting up migration log table
+# Creating a new migration log table
+Creating extended properties
+# Setting up __SchemaSnapshot table
+# Truncating __SchemaSnapshot
+# Check if baseline is required
+
+
+***** EXECUTING MIGRATION "Migrations\1.0.0-Baseline\00001_20190906_1000_BASELINE.sql", ID: {2dcd84e2-bf07-48c6-bfc8-5c92b6a84a3b} *****
+***** FINISHED EXECUTING MIGRATION "Migrations\1.0.0-Baseline\00001_20190906_1000_BASELINE.sql", ID: {2dcd84e2-bf07-48c6-bfc8-5c92b6a84a3b} *****
+
+
+
+***** EXECUTING MIGRATION "Migrations\1.1.0-Changes\00002_20190913_1112_Refactor_DropForeignKeys.sql", ID: {b9b4e2fe-6fff-4875-bc23-0778403e087a} *****
+Dropping Foreign Key: FK_Course_Department_DepartmentID
+Dropping Foreign Key: FK_CourseAssignment_Course_CourseID
+Dropping Foreign Key: FK_CourseAssignment_Instructor_InstructorID
+Dropping Foreign Key: FK_Department_Instructor_InstructorID
+Dropping Foreign Key: FK_Enrollment_Course_CourseID
+Dropping Foreign Key: FK_Enrollment_Student_StudentID
+Dropping Foreign Key: FK_OfficeAssignment_Instructor_InstructorID
+***** FINISHED EXECUTING MIGRATION "Migrations\1.1.0-Changes\00002_20190913_1112_Refactor_DropForeignKeys.sql", ID: {b9b4e2fe-6fff-4875-bc23-0778403e087a} *****
+
+
+
+***** EXECUTING MIGRATION "Migrations\1.1.0-Changes\00003_20190913_1114_Refactor_DropTables.sql", ID: {476241e3-adf4-4ec0-89f2-0113db3e431d} *****
+***** FINISHED EXECUTING MIGRATION "Migrations\1.1.0-Changes\00003_20190913_1114_Refactor_DropTables.sql", ID: {476241e3-adf4-4ec0-89f2-0113db3e431d} *****
+
+
+
+***** EXECUTING MIGRATION "Migrations\1.1.0-Changes\00004_20190913_1114_Refactor_ReCreateTables.sql", ID: {6a10bb3a-0a0b-4e9d-818e-ce8c88c5c230} *****
+***** FINISHED EXECUTING MIGRATION "Migrations\1.1.0-Changes\00004_20190913_1114_Refactor_ReCreateTables.sql", ID: {6a10bb3a-0a0b-4e9d-818e-ce8c88c5c230} *****
+
+
+
+***** EXECUTING MIGRATION "Migrations\1.1.0-Changes\00005_20190913_1115_InsertData.sql", ID: {e7519d53-56fe-4307-ac33-9cdc873f0123} *****
+***** FINISHED EXECUTING MIGRATION "Migrations\1.1.0-Changes\00005_20190913_1115_InsertData.sql", ID: {e7519d53-56fe-4307-ac33-9cdc873f0123} *****
+
+
+
+***** EXECUTING MIGRATION "Migrations\1.1.0-Changes\00006_20190913_1116_ReAddForeignKeys.sql", ID: {c52c0d04-b8d8-495c-8915-b1d51da34f79} *****
+***** FINISHED EXECUTING MIGRATION "Migrations\1.1.0-Changes\00006_20190913_1116_ReAddForeignKeys.sql", ID: {c52c0d04-b8d8-495c-8915-b1d51da34f79} *****
+
+
+
+***** EXECUTING MIGRATION "Migrations\1.1.0-Changes\00007_20190930_1502_MoreDMLForDatabase.sql", ID: {d20e3d47-94bc-483c-ad7f-2f5db3066672} *****
+***** FINISHED EXECUTING MIGRATION "Migrations\1.1.0-Changes\00007_20190930_1502_MoreDMLForDatabase.sql", ID: {d20e3d47-94bc-483c-ad7f-2f5db3066672} *****
+
+# Committing transaction
+----- executing post-deployment script "Post-Deployment\01_Finalize_Deployment.sql" -----
+Deployment completed successfully.
