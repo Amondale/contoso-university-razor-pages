@@ -7,7 +7,6 @@ Thanks to folks like @ardalis, @EduardoPires, @garymcleanhall, & @jbogard for sh
 
 ## Getting Started
 Use these instructions to get the project up and running.
-* TBD
 
 ### Prerequisites
 You will need the following tools:
@@ -17,10 +16,28 @@ You will need the following tools:
 * [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 * [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) - Recommended because I'm a data honk who likes control over persistance :-)
 
+### Environment Setup
+1. Clone or fork the project
+2. Open the master branch
+3. Create a new SQL Database (preferrably named ContosoUniversity).
+4. In the database_package folder, open [ContosoUniversity_Database_Package.sql](.\database_package\ContosoUniversity_Database_Package.sql) using your preferred .sql file editor.
+5. Update the DatabaseName in line 34 to the database name created in step 3 and close the file. <p align="left"><img src="_media/change_automation_package.png"></p>
+6. Back in Windows Explorer, enter CMD in the address bar and press the Enter key which will open a command prompt window. If command prompt is blocked then enter POWERSHELL in the address bar and press the Enter key which will open a PowerShell window.
+    * Note: The path should be defaulted to the database_package folder.
+7.  Paste the following code and press the enter key to deploy the databse code. 
+    ```
+    sqlcmd.exe -b -S "MICK" -o ".\contosouniversity.txt" -i ".\ContosoUniversity_Database_Package.sql"
+    ```
+8. Back in Winodws Explorer, open the output file named contosouniversity.txt to verify that the database was created successfully.
+9. In Visual Studio, open the ContosoUniverity.sln, navigate to the ContosoUniversity.Web project, edit the appsettings.json file setting the proper database and server name. <p align="left"><img src="_media/app_settings.png"></p>
+
+### Database Diagram
+A database diagram to help with understanding my take on this project is located here: [ContosoUniversityDatabaseDiagram](_media\ContosoUniversityDatabaseDiagram.pdf)
+
 ## Technologies
-* .NET Core 2.2
-* ASP.NET Core 2.2
-* Entity Framework Core 2.2
+* .NET Core 3.0
+* ASP.NET Core 3.0
+* Entity Framework Core 3.0
 
 ## Packages Utilized 
 * [Automapper](https://github.com/AutoMapper/AutoMapper)
