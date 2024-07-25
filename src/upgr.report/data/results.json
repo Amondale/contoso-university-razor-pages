@@ -1,0 +1,106 @@
+results = 
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": true
+    },
+    "targetId": "",
+    "targetDisplayName": ".NET 8.0"
+  },
+  "analysisStartTime": "2024-07-25T15:00:31.7596869Z",
+  "analysisEndTime": "2024-07-25T15:01:04.4221402Z",
+  "privacyMode": "Unrestricted",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 2,
+      "incidents": 2,
+      "effort": 2
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 1,
+        "Optional": 0,
+        "Potential": 1,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 2
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "src\\ContosoUniversity.Application\\ContosoUniversity.Application.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "ruleInstances": [
+        {
+          "incidentId": "082c9ccc-0fbd-4703-a67f-954bc9cd757d",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\ContosoUniversity.Application\\ContosoUniversity.Application.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "src\\ContosoUniversity.Application\\ContosoUniversity.Application.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore, 3.0.0\n\nRecommendation:\n\nMicrosoft.EntityFrameworkCore 8.0.7",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore, 3.0.0\n\nRecommendation:\n\nMicrosoft.EntityFrameworkCore 8.0.7",
+            "label": "Microsoft.EntityFrameworkCore 3.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "path": "src\\ContosoUniversity.Core\\ContosoUniversity.Core.csproj",
+      "startingProject": false,
+      "issues": 1,
+      "storyPoints": 1,
+      "ruleInstances": [
+        {
+          "incidentId": "a880a334-1b13-446e-8e7e-43eb39fb8dab",
+          "ruleId": "NuGet.0003",
+          "projectPath": "src\\ContosoUniversity.Core\\ContosoUniversity.Core.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "src\\ContosoUniversity.Core\\ContosoUniversity.Core.csproj",
+            "snippet": "System.ComponentModel.Annotations, 5.0.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "protectedSnippet": "System.ComponentModel.Annotations, 5.0.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "label": "System.ComponentModel.Annotations 5.0.0"
+          }
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "description": "NuGet package functionality is included with framework reference.\n\nPackage needs to be removed.",
+      "label": "NuGet package functionality is included with framework reference",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

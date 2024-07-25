@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ContosoUniversity.Application.ViewModels;
 using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace ContosoUniversity.Web.Pages.Students
 {
@@ -48,6 +49,7 @@ namespace ContosoUniversity.Web.Pages.Students
             CurrentFilter = searchString;
 
             var tempStudents = await _repository.GetStudentsByFilter(searchString, sortOrder);
+            //Students = _mapper.Map<List<StudentViewModel>>(tempStudents).ToPagedList(page, 8);
             Students = _mapper.Map<List<StudentViewModel>>(tempStudents).ToPagedList(page, 8);
         }
     }
