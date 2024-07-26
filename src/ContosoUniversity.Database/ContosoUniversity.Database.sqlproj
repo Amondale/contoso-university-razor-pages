@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Construct" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -166,7 +166,7 @@
     <AppDataPath>$(APPDATA)</AppDataPath>
   </PropertyGroup>
   <Import Condition="Exists('$(SqlChangeAutomationTargetsPath)')" Project="$(SqlChangeAutomationTargetsPath)" />
-  <Import Condition="!Exists('$(SqlChangeAutomationTargetsPath)')" Project="$(MSBuildExtensionsPath)\SqlChangeAutomation\SqlChangeAutomation.Data.Schema.Ssdt.targets" />
+  <!-- Import Condition="!Exists('$(SqlChangeAutomationTargetsPath)')" Project="$(MSBuildExtensionsPath)\SqlChangeAutomation\SqlChangeAutomation.Data.Schema.Ssdt.targets" / -->
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="Pre-Deployment\" />
@@ -202,4 +202,7 @@
   <ItemGroup>
     <None Include="Migrations\1.1.0-Changes\00007_20190930_1502_MoreDMLForDatabase.sql" />
   </ItemGroup>
+  <Target Name="Construct">
+    <Message Text="First occurrence" /> 
+</Target>
 </Project>
