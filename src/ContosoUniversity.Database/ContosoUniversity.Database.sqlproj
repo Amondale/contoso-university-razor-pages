@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{0086e0cb-0737-4a3f-994a-6cf7532ac111}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -17,7 +17,7 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -42,6 +42,7 @@
     <MinimumEngineVersion>1.17.18144</MinimumEngineVersion>
     <BuildOptionSkipLocalSqlBackup>True</BuildOptionSkipLocalSqlBackup>
     <BuildOptionBackupShadowDatabase>False</BuildOptionBackupShadowDatabase>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <!-- SQL CHANGE AUTOMATION OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -203,6 +204,6 @@
     <None Include="Migrations\1.1.0-Changes\00007_20190930_1502_MoreDMLForDatabase.sql" />
   </ItemGroup>
   <Target Name="Construct">
-    <Message Text="First occurrence" /> 
-</Target>
+    <Message Text="First occurrence" />
+  </Target>
 </Project>
